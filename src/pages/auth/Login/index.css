@@ -37,6 +37,7 @@
     background-image: url(../../../assets/image/Group\ 10.png);
     height: 1024px !important;
     width: 700px !important;
+    background-size: fit !important;
   }
 
   .jumbotron img {

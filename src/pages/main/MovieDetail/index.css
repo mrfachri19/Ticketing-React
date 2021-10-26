@@ -1,0 +1,89 @@
+.cards {
+  margin-top: 40px;
+}
+
+.border__card {
+  border: 1px solid #dedede;
+  padding: 20px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.card {
+  width: 18rem;
+}
+
+.card__image {
+  width: 15rem;
+}
+
+.h1 h1 {
+  margin-top: 20px;
+  font-size: 20px;
+  text-align: left;
+}
+
+.h1 p {
+  font-size: 12px;
+  text-align: left;
+}
+
+.h2 p,
+.h3 p {
+  font-size: 12px;
+  color: #8692a6;
+  text-align: left;
+}
+
+.h2 h6,
+.h3 h6 {
+  font-size: 12px;
+  text-align: left;
+}
+
+.h2 {
+  margin-top: 20px;
+}
+
+.showtime h3 {
+  margin-top: 150px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.dates {
+  margin-top: 20px;
+  margin-bottom: 72px;
+  text-align: center;
+}
+
+.kalender {
+  margin-bottom: 5px;
+}
+
+.kartu1 img {
+  width: 4rem;
+}
+
+.kartu1 h6 {
+  font-size: 16px;
+}
+.kartu1 p {
+  font-size: 8x;
+}
+
+.kartu1 {
+  margin-bottom: 32px;
+}
+
+.col-sm-4 {
+  margin-bottom: 20px;
+}
+
+.tombols {
+  margin-top: 32px;
+  margin-bottom: 50px;
+}
+
+.tombol {
+  text-align: center;
+}

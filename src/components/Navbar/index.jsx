@@ -11,7 +11,7 @@ class Navbar extends Component {
 
   handleLogout = () => {
     console.log("Logout");
-    this.props.history.push("/login");
+    this.props.history.push("/basic-login");
   };
 
   render() {

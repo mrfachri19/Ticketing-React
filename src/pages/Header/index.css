@@ -1,10 +1,17 @@
-.navbar__brand {
-  margin-left: 20px !important;
+button.nav__brand.navbar-toggler.collapsed {
+  margin-left: 25px !important;
 }
-.justify-content-end {
-  margin-left: 240px !important;
+.nav__brand {
+  margin-left: 10px !important;
 }
-.navbar__button {
-  margin-left: 12px !important;
-  width: 90px;
+
+.navbar__tiket img {
+  width: 10rem;
+}
+
+/* dekstop */
+@media (min-width: 992px) {
+  .navbar__tiket {
+    margin-right: 43px !important;
+  }
 }

@@ -1,0 +1,18 @@
+.body__result {
+  background-color: #5f2eea;
+}
+.tiketresult {
+  margin-bottom: 96px;
+  margin-top: 72px;
+  border: 10px #b3acac;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.12);
+  background-color: white;
+  height: 640px;
+  width: 976px;
+}
+
+.tiketresult h5 {
+  margin-top: 40px;
+  text-align: center;
+}

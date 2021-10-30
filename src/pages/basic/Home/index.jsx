@@ -12,13 +12,65 @@ class Home extends Component {
       data: [],
       page: 1,
       limit: 3,
-      pageInfo: {}
+      pageInfo: {},
+      form: {
+        name: "",
+        category: "",
+        realeasedDate: "",
+        synopsis: "",
+        image: null
+      }
     };
   }
 
   componentDidMount() {
     this.getDataMovie();
   }
+
+  changeText = (event) => {
+    this.setState({
+      form: {
+        ...this.state.form,
+        [event.target.name]: event.target.value
+      }
+    });
+  };
+
+  changeFile = (event) => {
+    this.setState({
+      form: {
+        ...this.state.form,
+        [event.target.name]: event.target.files[0]
+      }
+    });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    // console.log(this.state.form);
+    const formData = new formData();
+
+    for (const data in this.state.form) {
+      formData.append(data, this.state.form[data]);
+    }
+    // for (const pair of formData.entries()) {
+    //   console.log(pair[0] + ", " + pair[1]);
+    // }
+
+    // axios.post("movie", formData)
+  };
+
+  setUpdate = () => {
+    console.log("setupdate");
+  };
+
+  handleUpdate = () => {
+    console.log("handleupdate");
+  };
+
+  handleDelete = () => {
+    console.log("handledelete");
+  };
 
   getDataMovie = () => {
     axios
@@ -65,6 +117,43 @@ class Home extends Component {
       <div className="container text-center">
         <h1>Home Page</h1>
         <Navbar />
+        <form onSubmit={this.handleSubmit}>
+          <input
+            type="text"
+            placeholder="Input Name..."
+            name="name"
+            onChange={(event) => this.changeText(event)}
+          />
+          <br />
+          <input
+            type="text"
+            placeholder="Input category..."
+            name="category"
+            onChange={(event) => this.changeText(event)}
+          />
+          <br />
+          <input
+            type="date"
+            placeholder="Input Released date..."
+            name="name"
+            onChange={(event) => this.changeText(event)}
+          />
+          <br />
+          <input
+            type="text"
+            placeholder="Input Sinopsis..."
+            name="name"
+            onChange={(event) => this.changeText(event)}
+          />
+          <br />
+          <input
+            type="file"
+            placeholder="Input image..."
+            name="image"
+            onChange={(event) => this.changeFile(event)}
+          />
+          <br />
+        </form>
         <hr />
         <div className="row">
           {data.map((item) => (

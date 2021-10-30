@@ -48,9 +48,9 @@ class DetailMovie extends Component {
     this.getMovieDetail();
   }
 
-  // getMovieDetail = () => {
-  //   axios.get(`movie/${this.state.movieId}`).then().catch();
-  // };
+  getMovieDetail = () => {
+    // axios.get(`movie/${this.state.movieId}`).then().catch();
+  };
   handleChangeDate = (event) => {
     // if (condition jika user memilih tanggal hari sebelumnya) {
     //   console.log("tanggal tidak bisa di akses");

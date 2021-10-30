@@ -1,0 +1,45 @@
+/* body {
+  background-color: #e5e5e5;
+} */
+
+h3 {
+  margin-top: 56px;
+  font-size: 24px;
+}
+
+.order {
+  margin-top: 24px;
+  border: #bababa;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.12);
+  padding: 10px;
+  background-color: #fff;
+}
+
+.order img {
+  margin-top: 39px;
+  margin-left: 100px;
+  width: 8rem;
+}
+
+.order h3 {
+  font-size: 23px;
+  margin-top: 13px;
+}
+
+.order h6 {
+  font-size: 14px;
+  color: #6b6b6b;
+}
+
+.chooseseat .seat {
+  text-align: center;
+  border: 1px #b3acac;
+  border-radius: 6px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.12);
+  padding: 100px;
+  width: 500px;
+}
+
+.button__movie button {
+  width: 200px;
+}

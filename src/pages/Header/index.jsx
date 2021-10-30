@@ -25,38 +25,43 @@ class Header extends Component {
     // console.log(this.props);
     // console.log(this.state);
     return (
-      <div className="container">
-        <Navbar bg="white" expand="lg">
-          <Container className="container">
-            <Navbar.Brand>
-              <img src={tiket} alt="ticketz 1" />
-            </Navbar.Brand>
-            <Nav className="navbar__brand">
-              <Nav.Link onClick={this.handleHome}>Home</Nav.Link>
-              <Nav.Link href="#link">Profile</Nav.Link>
+      <Navbar bg="white" expand="sm" className="nav__brand">
+        <Container fluid>
+          <Navbar.Brand className="navbar__tiket">
+            <img src={tiket} alt="ticketz 1" />
+            <Navbar.Toggle className="nav__brand" aria-controls="responsive-navbar-nav" />
+          </Navbar.Brand>
+
+          <Navbar.Collapse className="nav justify-content-end" id="responsive-navbar-nav">
+            <Nav className="me-auto">
+              <Nav.Link onClick={this.handleHome} style={{ marginRight: "40px" }}>
+                Home
+              </Nav.Link>
+              <Nav.Link href="#link" style={{ marginRight: "40px" }}>
+                Profile
+              </Nav.Link>
               <Nav.Link href="#link">Payment</Nav.Link>
             </Nav>
-
-            <Navbar.Collapse className="nav justify-content-end">
-              <Nav className="justify-content-end ">
-                <NavDropdown title="Location" className="justify-content-end">
-                  <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.2">Another action</NavDropdown.Item>
-                  <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-                  <NavDropdown.Divider />
-                  <NavDropdown.Item href="#action/3.4">Separated link</NavDropdown.Item>
-                </NavDropdown>
-                <Nav.Link href="">
-                  <FontAwesomeIcon icon={faSearch} />
-                </Nav.Link>
-                <Button variant="primary" className="navbar__button">
-                  Sign In
-                </Button>{" "}
-              </Nav>
-            </Navbar.Collapse>
-          </Container>
-        </Navbar>
-      </div>
+            <Nav className="justify-content-end ">
+              <NavDropdown
+                title="Location"
+                className="justify-content-end"
+                style={{ marginRight: "30px" }}
+              >
+                <NavDropdown.Item href="#action/3.1">Jakarta</NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.2">Medan </NavDropdown.Item>
+                <NavDropdown.Item href="#action/3.3">Yogyakarta</NavDropdown.Item>
+              </NavDropdown>
+              <Nav.Link href="" style={{ marginRight: "40px" }}>
+                <FontAwesomeIcon icon={faSearch} />
+              </Nav.Link>
+              <Button variant="primary" className="navbar__button" style={{ marginRight: "40px" }}>
+                Sign In
+              </Button>{" "}
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
     );
   }
 }

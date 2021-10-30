@@ -1,0 +1,24 @@
+.card__points {
+  border: 10px #b3acac;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.12);
+  background-color: #7647f9;
+  height: 100px;
+}
+
+.navbar__profile {
+  margin-top: 70px;
+  background-color: white;
+  border: 10px #b3acac;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.12);
+  margin-bottom: 100px;
+}
+
+.button__profile {
+  margin-bottom: 30px;
+}
+
+.button__profile button {
+  width: 300px;
+}

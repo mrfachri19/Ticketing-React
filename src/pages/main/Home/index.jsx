@@ -7,7 +7,7 @@ import "./index.css";
 import banner from "../../../assets/image/Group 14.png";
 import lion from "../../../assets/image/Rectangle 119.1.png";
 import widow from "../../../assets/image/Rectangle 139-4.png";
-import { Button, Card, Col, Row, Form } from "react-bootstrap";
+import { Button, Card, Col, Row, Form, Container } from "react-bootstrap";
 
 // import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -71,7 +71,7 @@ class Home extends Component {
     return (
       <div>
         <Header />
-        <div className="container">
+        <Container>
           <div className="row">
             <div className="col-sm-6">
               <div className="newest__movie">
@@ -86,14 +86,14 @@ class Home extends Component {
             </div>
           </div>
           <div className="now__showing">
-            <div className="row">
-              <div className="col-sm-11">
+            <Row xs="auto">
+              <Col sm={11}>
                 <h4 className="text-left font-size-24 ">Now Showing</h4>
-              </div>
-              <div className="col-sm-1 view">
+              </Col>
+              <Col sm={1} className="view">
                 <p>view all</p>
-              </div>
-            </div>
+              </Col>
+            </Row>
           </div>
 
           <div classNameName="row">
@@ -184,44 +184,71 @@ class Home extends Component {
             </div>
           </div>
 
-          <div classNameName="month__buttons">
-            <Button variant="outline-primary" className="btn">
-              January
-            </Button>{" "}
-            <Button variant="outline-primary" className="btn">
-              February
-            </Button>{" "}
-            <Button variant="outline-primary" className="btn">
-              March
-            </Button>{" "}
-            <Button variant="outline-primary" className="btn">
-              April
-            </Button>{" "}
-            <Button variant="outline-primary" className="btn">
-              May
-            </Button>{" "}
-            <Button variant="outline-primary" className="btn">
-              June
-            </Button>{" "}
-            <Button variant="outline-primary" className="btn">
-              July
-            </Button>{" "}
-            <Button variant="outline-primary" className="btn">
-              August
-            </Button>{" "}
-            <Button variant="outline-primary" className="btn">
-              September
-            </Button>{" "}
-            <Button variant="outline-primary" className="btn">
-              October
-            </Button>{" "}
-            <Button variant="outline-primary" className="btn">
-              November
-            </Button>{" "}
-            <Button variant="outline-primary" className="btn">
-              December
-            </Button>
-          </div>
+          <Row>
+            <div className="month__button">
+              <Col>
+                <Button variant="outline-primary" className="btn">
+                  January
+                </Button>
+              </Col>
+              <Col>
+                <Button variant="outline-primary" className="btn">
+                  February
+                </Button>
+              </Col>
+              <Col>
+                <Button variant="outline-primary" className="btn">
+                  March
+                </Button>
+              </Col>
+              <Col>
+                <Button variant="outline-primary" className="btn">
+                  April
+                </Button>
+              </Col>
+              <Col>
+                <Button variant="outline-primary" className="btn">
+                  May
+                </Button>
+              </Col>
+              <Col>
+                <Button variant="outline-primary" className="btn">
+                  June
+                </Button>
+              </Col>
+              <Col>
+                <Button variant="outline-primary" className="btn">
+                  July
+                </Button>
+              </Col>
+              <Col>
+                <Button variant="outline-primary" className="btn">
+                  August
+                </Button>
+              </Col>
+              <Col>
+                <Button variant="outline-primary" className="btn">
+                  September
+                </Button>
+              </Col>
+              <Col>
+                <Button variant="outline-primary" className="btn">
+                  October
+                </Button>
+              </Col>
+              <Col>
+                <Button variant="outline-primary" className="btn">
+                  November
+                </Button>
+              </Col>
+              <Col>
+                <Button variant="outline-primary" className="btn">
+                  December
+                </Button>
+              </Col>
+            </div>
+          </Row>
+
           <div className="row">
             <div className="kartu">
               {data.map((item) => (
@@ -231,7 +258,7 @@ class Home extends Component {
               ))}
             </div>
           </div>
-          <div className="row">
+          <Row>
             <div className="col-sm-12">
               <div className="moviegoers">
                 <h2 className="text-center">
@@ -240,7 +267,7 @@ class Home extends Component {
                 <div className="form__control">
                   <Form>
                     <Row className="align-items-center">
-                      <Col sm={3} className="my-1">
+                      <Col sm={{ span: 2, offset: 4 }} className="my-1">
                         <Form.Control id="inlineFormInputName" placeholder="Type Your Email" />
                       </Col>
                       <Col xs="auto" className="my-1">
@@ -249,7 +276,6 @@ class Home extends Component {
                     </Row>
                   </Form>
                 </div>
-
                 <p className="text-center">
                   By joining you as a Tickitz member,
                   <br />
@@ -257,8 +283,8 @@ class Home extends Component {
                 </p>
               </div>
             </div>
-          </div>
-        </div>
+          </Row>
+        </Container>
         <Footer />
       </div>
     );

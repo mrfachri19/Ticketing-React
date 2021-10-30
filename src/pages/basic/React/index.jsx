@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Navbar from "../../../components/Navbar";
 import styles from "./BasicReact.module.css";
 import { Button, Modal } from "react-bootstrap";
-import CardMovie from "../../../components/Card";
+// import CardMovie from "../../../components/Card";
 
 class BasicReact extends Component {
   constructor() {
@@ -162,7 +162,7 @@ class BasicReact extends Component {
 
         <hr />
         {/* COMPONENT COMUNICATION */}
-        <CardMovie handleUpdate={this.handleUpdateMovie} />
+        {/* <CardMovie handleUpdate={this.handleUpdateMovie} /> */}
       </>
     );
   }

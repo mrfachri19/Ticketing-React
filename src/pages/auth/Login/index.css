@@ -5,6 +5,11 @@
   display: inline-block !important;
   margin-top: 55px;
   margin-bottom: 40px;
+  margin-left: 30px;
+}
+
+.form__login {
+  margin-left: 30px;
 }
 
 .form__login-reset {
@@ -24,11 +29,6 @@
 
 /* dekstop */
 @media (min-width: 992px) {
-  .container {
-    margin: 0 !important;
-    padding: 0 !important;
-  }
-
   .jumbotron {
     display: inline-block;
   }
@@ -37,7 +37,6 @@
     background-image: url(../../../assets/image/Group\ 10.png);
     height: 1024px !important;
     width: 700px !important;
-    background-size: fit !important;
   }
 
   .jumbotron img {
@@ -58,6 +57,7 @@
 
   .form__login {
     margin-top: 176px !important;
+    margin-left: 30px !important;
   }
 
   .login {

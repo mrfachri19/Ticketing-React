@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Form, Jumbotron } from "react-bootstrap";
+import { Button, Form, Jumbotron, Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import axios from "../../../utils/axios";
 import tiket from "../../../assets/image/tickitz 1.png";
-
+import vektor from "../../../assets/image/Vector.png";
+import facebook from "../../..//assets/image/Vector fac.png";
+import google from "../../..//assets/image/flat-color-icons_google.png";
 class Login extends Component {
   constructor() {
     super();
@@ -40,7 +42,7 @@ class Login extends Component {
         this.props.history.push("/homepage");
       })
       .catch((err) => {
-        // console.log(err.response);
+        console.log(err.response.data.msg);
         this.setState({
           isError: true,
           msg: err.response.data.msg
@@ -61,8 +63,8 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="row">
-        <div className="col-sm-8">
+      <Row>
+        <Col sm={7}>
           <Jumbotron>
             <div className="jumbotron text-center tiket">
               <img src={tiket} alt="tickitz 1" />
@@ -70,11 +72,11 @@ class Login extends Component {
             </div>
           </Jumbotron>
           <div className="jumbotron__img">
-            <img src={tiket} alt="tickitz 1" />
+            <img src={vektor} alt="tickitz 1" />
           </div>
-        </div>
+        </Col>
 
-        <div className="col-sm-4 form__login">
+        <Col sm={4} className="form__login">
           <div className="row ">
             <h1>Sign In</h1>
             <p>
@@ -83,6 +85,7 @@ class Login extends Component {
           </div>
           <div className="row login">
             <Form onSubmit={this.handleSubmit} onReset={this.handleReset}>
+              {this.state.isError && <div className="alert alert-danger">{this.state.msg}</div>}
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email </Form.Label>
                 <Form.Control
@@ -116,19 +119,19 @@ class Login extends Component {
           <div className="row button__login">
             <div className="col-sm-6 form__login-btnlink text-center">
               <Button variant="light">
-                {" "}
-                <p>Google</p>{" "}
+                <img src={google} style={{ marginBottom: "2px" }} alt="tickitz 1" />
+                <p style={{ marginLeft: "2px" }}>Google</p>
               </Button>
             </div>
             <div className="col-sm-6 form__login-btnlink text-center">
               <Button variant="light">
-                {" "}
-                <p>Facebook</p>{" "}
+                <img src={facebook} style={{ marginBottom: "2px" }} alt="tickitz 1" />
+                <p style={{ marginLeft: "2px" }}>Facebook</p>
               </Button>
             </div>
           </div>
-        </div>
-      </div>
+        </Col>
+      </Row>
     );
   }
 }

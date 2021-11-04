@@ -4,3 +4,5 @@ import promiseMiddleware from "redux-promise-middleware";
 import rootReducer from "./reducer";
 
 export default createStore(rootReducer, applyMiddleware(promiseMiddleware, logger));
+
+// STORES/INDEX.JS

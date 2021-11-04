@@ -17,8 +17,18 @@ class Header extends Component {
   //   }
 
   handleHome = () => {
-    console.log("home");
-    this.props.history.push("/login");
+    // console.log("home");
+    this.props.history.push("/home");
+  };
+
+  handleProfile = () => {
+    // console.log("profile");
+    this.props.history.push("/profile");
+  };
+
+  handlePayment = () => {
+    // console.log("payment");
+    this.props.history.push("/payment");
   };
 
   render() {
@@ -37,10 +47,10 @@ class Header extends Component {
               <Nav.Link onClick={this.handleHome} style={{ marginRight: "40px" }}>
                 Home
               </Nav.Link>
-              <Nav.Link href="#link" style={{ marginRight: "40px" }}>
+              <Nav.Link onClick={this.handleProfile} style={{ marginRight: "40px" }}>
                 Profile
               </Nav.Link>
-              <Nav.Link href="#link">Payment</Nav.Link>
+              <Nav.Link onClick={this.handlePayment}>Payment</Nav.Link>
             </Nav>
             <Nav className="justify-content-end ">
               <NavDropdown

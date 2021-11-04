@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Header from "../../Header/index";
 import Footer from "../../Footer/index";
-import Cards from "../../../components/Card";
+import Cards from "../../../components/Cardhome";
 import axios from "../../../utils/axios";
 import "./index.css";
 import banner from "../../../assets/image/Group 14.png";

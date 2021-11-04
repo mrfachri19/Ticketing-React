@@ -26,9 +26,18 @@ class DetailMovie extends Component {
         {
           id: 2,
           premiere: "CineOne",
-          location: "Jakarta",
+          location: "los angles",
           price: 50,
-          time: ["13:00", "15:00"],
+          time: ["13:00", "15:00", "14:00"],
+          dateStart: "2021-02-02",
+          dateEnd: "2021-03-03"
+        },
+        {
+          id: 2,
+          premiere: "CineOne",
+          location: "miami",
+          price: 50,
+          time: ["11:00", "12:00", "14:00"],
           dateStart: "2021-02-02",
           dateEnd: "2021-03-03"
         }
@@ -44,13 +53,18 @@ class DetailMovie extends Component {
     // [2]
     // console.log(this.props.location.state);
     // [3]
-    console.log(this.props.match.params);
+    // console.log(this.props.match.params);
     this.getMovieDetail();
   }
 
   getMovieDetail = () => {
     // axios.get(`movie/${this.state.movieId}`).then().catch();
+    const data = [{ movieName: "BlackWidow" }];
+    this.setState({
+      dataDetailMovie: data
+    });
   };
+
   handleChangeDate = (event) => {
     // if (condition jika user memilih tanggal hari sebelumnya) {
     //   console.log("tanggal tidak bisa di akses");
@@ -96,12 +110,20 @@ class DetailMovie extends Component {
   };
 
   render() {
+    console.log(this.state.dataDetailMovie);
     return (
       <div className="container text-center">
         <h1>DetailMovie Page</h1>
         <Navbar />
         <hr />
         <h6>DETAIL MOVIE</h6>
+        {this.state.dataDetailMovie.length > 0 && (
+          <>
+            <p>{this.state.dataDetailMovie[0].movieName}</p>
+            <p>{this.state.dataDetailMovie[0].movieName}</p>
+          </>
+        )}
+
         <hr />
         <h6>List Schedule</h6>
         <input type="date" value={this.state.dateSchedule} onChange={this.handleChangeDate} />

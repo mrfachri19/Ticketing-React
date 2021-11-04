@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Button, Form, Jumbotron, Col, Row } from "react-bootstrap";
+import { getdatauser } from "../../../Stores/actions/getdatauser";
 import { Link } from "react-router-dom";
-import axios from "../../../utils/axios";
+// import axios from "../../../utils/axios";
+import { connect } from "react-redux";
+import { login } from "../../../Stores/actions/auth";
 import tiket from "../../../assets/image/tickitz 1.png";
 import vektor from "../../../assets/image/Vector.png";
 import facebook from "../../..//assets/image/Vector fac.png";
@@ -31,29 +34,40 @@ class Login extends Component {
     });
   };
 
+  // getUserById = (id) => {
+  //   axios
+  //     .get(`user/${id}`)
+  //     .then((res) => {
+  //       // console.log(res.data);
+  //       this.setState({
+  //         dataProfile: res.data.data
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.response);
+  //     });
+  //   const user = [];
+  //   const data = JSON.stringify(user[0]); // res.data.data[0]
+  //   localStorage.setItem("dataUser", data);
+
+  //   // UNTUK GET NYA ketika di komponen lain
+  //   // let dataProfile = localStorage.getItem("dataUser");
+  //   // dataProfile = JSON.parse(dataProfile);
+  //   // })
+  // };
+
   handleSubmit = (event) => {
     event.preventDefault();
-    // console.log("Submit Login");
-    axios
-      .post("auth/login", this.state.form)
-      .then((res) => {
-        // console.log(res.data.data.token);
-        localStorage.setItem("token", res.data.data.token);
+    this.props.login(this.state.form).then((res) => {
+      console.log("login");
+      localStorage.setItem("token", res.value.data.data.token);
+      this.props.getdatauser(res.value.data.data.id).then((res) => {
         this.props.history.push("/homepage");
-      })
-      .catch((err) => {
-        console.log(err.response.data.msg);
-        this.setState({
-          isError: true,
-          msg: err.response.data.msg
-        });
-        setTimeout(() => {
-          this.setState({
-            isError: false,
-            msg: ""
-          });
-        }, 2000);
       });
+      // console.log(this.props.auth);
+      // console.log(res);
+      // localStorage.setItem("token", this.props.auth.idUser);
+    });
   };
 
   handleReset = (event) => {
@@ -136,4 +150,10 @@ class Login extends Component {
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => ({
+  auth: state.auth
+});
+
+const mapDispatchToProps = { login, getdatauser };
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

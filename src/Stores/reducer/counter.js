@@ -1,5 +1,6 @@
 const initialState = {
-  count: 0
+  count: 0,
+  disabled: false
 };
 
 const counter = (state = initialState, action) => {
@@ -13,7 +14,9 @@ const counter = (state = initialState, action) => {
       // }
       return {
         ...state,
-        count: state.count + 1
+        count: state.count + action.data
+        // disabled: state.count === 5 ? true : false
+        // disabled: checkCount
       };
     }
     default: {
@@ -23,4 +26,7 @@ const counter = (state = initialState, action) => {
     }
   }
 };
+
 export default counter;
+
+// STORES/REDUCER/COUNTER.JS

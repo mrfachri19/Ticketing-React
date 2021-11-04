@@ -22,20 +22,15 @@ class CardMovie extends Component {
             }
           />
           <Card.Body>
-            <Card.Title style={{ textAlign: "center" }}>{name}</Card.Title>
-            <Card.Text style={{ textAlign: "center" }}>{category}</Card.Text>
-            {/* <Button variant="primary" onClick={() => this.props.handleDetail(id)}>
+            <Card.Title>{name}</Card.Title>
+            <Card.Text>{category}</Card.Text>
+            <Button
+              variant="primary"
+              style={{ widht: "80px", marginLeft: "30px" }}
+              onClick={() => this.props.handleDetail(id)}
+            >
               Detail
-            </Button> */}
-            {/* 1 */}
-            <Button variant="secondary" onClick={() => this.props.handleUpdate(1)}>
-              Update
             </Button>
-            {/* 2 */}
-            {/* <Button variant="secondary" onClick={this.handleSetUpdate}>
-              Update
-            </Button> */}
-            <Button variant="danger">Delete</Button>
           </Card.Body>
         </Card>
       </>

@@ -1,6 +1,6 @@
-export const increaseCounter = () => {
+export const increaseCounter = (data) => {
   return {
-    type: "INCREASE"
+    type: "INCREASE",
+    data: data
   };
-  // console.log("INCREASE");
 };

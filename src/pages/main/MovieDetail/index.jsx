@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import qs from "query-string";
-import { Image, Container } from "react-bootstrap";
+import { Image, Container, Dropdown, DropdownButton, Col } from "react-bootstrap";
 import Header from "../../../pages/Header";
 import axios from "../../../utils/axios";
 import vektor from "../../../assets/image/Vector13.png";
@@ -18,26 +18,7 @@ class Detail extends Component {
       timeSchedule: "",
       dateSchedule: dateNow,
       // ========================
-      dataSchedule: [
-        {
-          id: 1,
-          premiere: "Ebu.id",
-          location: "Jakarta",
-          price: 50,
-          time: ["10:00", "12:00"],
-          dateStart: "2021-02-02",
-          dateEnd: "2021-03-03"
-        },
-        {
-          id: 2,
-          premiere: "CineOne",
-          location: "Jakarta",
-          price: 50,
-          time: ["13:00", "15:00"],
-          dateStart: "2021-02-02",
-          dateEnd: "2021-03-03"
-        }
-      ],
+      dataSchedule: [],
       dataDetailMovie: []
     };
   }
@@ -51,6 +32,8 @@ class Detail extends Component {
     // [3]
     console.log(this.props.match.params);
     this.getMovieDetail();
+
+    this.getSchedule();
   }
 
   getMovieDetail = () => {
@@ -66,6 +49,21 @@ class Detail extends Component {
         console.log(err.response);
       });
   };
+
+  getSchedule = () => {
+    axios
+      .get(`schedule/${this.state.scheduleId}`)
+      .then((res) => {
+        // console.log(res.data);
+        this.setState({
+          dataSchedule: res.data.data
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+      });
+  };
+
   handleChangeDate = (event) => {
     // if (condition jika user memilih tanggal hari sebelumnya) {
     //   console.log("tanggal tidak bisa di akses");
@@ -81,6 +79,7 @@ class Detail extends Component {
   };
 
   handleBooking = (data) => {
+    console.log(data);
     this.setState(
       {
         scheduleId: data
@@ -92,7 +91,7 @@ class Detail extends Component {
         // console.log(this.state.scheduleId);
         // console.log(this.state.dateSchedule);
         // console.log(this.state.timeSchedule);
-        this.props.history.push("", {
+        this.props.history.push("/order", {
           movieId,
           scheduleId,
           dateSchedule,
@@ -113,6 +112,8 @@ class Detail extends Component {
   render() {
     const { dataDetailMovie } = this.state;
     console.log(this.state.dataDetailMovie);
+    console.log(this.state.dataSchedule);
+
     return (
       <div>
         <Header />
@@ -121,7 +122,11 @@ class Detail extends Component {
             <div className="col-sm-3">
               <div className="card__image">
                 <div className="border__card">
-                  {dataDetailMovie.length > 0 && <Image src={dataDetailMovie[0].image} />}
+                  {dataDetailMovie.length > 0 && (
+                    <Image
+                      src={`http://localhost:3001/uploads/movie/${dataDetailMovie[0].image}`}
+                    />
+                  )}
                 </div>
               </div>
             </div>
@@ -139,11 +144,19 @@ class Detail extends Component {
               <div className="row h2">
                 <div className="col-sm-4">
                   <p>Realesed date</p>
-                  <h6>June 28, 2017</h6>
+                  {dataDetailMovie.length > 0 && (
+                    <>
+                      <h6>{dataDetailMovie[0].releaseDate}</h6>
+                    </>
+                  )}
                 </div>
                 <div className="col-sm-8">
                   <p>Directed By</p>
-                  <h6>Jhon Watss</h6>
+                  {dataDetailMovie.length > 0 && (
+                    <>
+                      <h6>{dataDetailMovie[0].director}</h6>
+                    </>
+                  )}
                 </div>
               </div>
               <div className="row h3">
@@ -153,20 +166,24 @@ class Detail extends Component {
                 </div>
                 <div className="col-sm-8">
                   <p>Cast</p>
-                  <h6>Tom Holland, Michael Keaton, Robert Downey Jr., ...</h6>
+                  {dataDetailMovie.length > 0 && (
+                    <>
+                      <h6>{dataDetailMovie[0].cast}</h6>
+                    </>
+                  )}
                 </div>
               </div>
               <hr className="my-4" />
               <div className="sinopsis">
                 <h2>Synopsis</h2>
-                <p className="text-justify">
-                  Thrilled by his experience with the Avengers, Peter returns home, where he lives
-                  with his Aunt May, under the watchful eye of his new mentor Tony Stark, Peter
-                  tries to fall back into his normal daily routine - distracted by thoughts of
-                  proving himself to be more than just your friendly neighborhood Spider-Man - but
-                  when the Vulture emerges as a new villain, everything that Peter holds most
-                  important will be threatened.{" "}
-                </p>
+
+                {dataDetailMovie.length > 0 && (
+                  <>
+                    <p className="text-justify" style={{ fontSize: "16px" }}>
+                      {dataDetailMovie[0].synopsis}
+                    </p>
+                  </>
+                )}
               </div>
             </div>
           </div>
@@ -180,409 +197,68 @@ class Detail extends Component {
               <input type="date" value={this.state.dateSchedule} onChange={this.handleChangeDate} />
             </div>
             <div className="col-sm-3 dates">
-              <div className="btn-group">
-                <button type="button" className="btn btn-primary">
-                  <i className="fas fa-map-marker-alt mr-3"></i> Location
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-primary dropdown-toggle dropdown-toggle-split"
-                  data-toggle="dropdown"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <span className="sr-only">Toggle Dropdown</span>
-                </button>
-                <div className="dropdown-menu">
-                  <div className="dropdown-divider"></div>
-                </div>
-              </div>
+              <DropdownButton id="dropdown-basic-button" title="Location">
+                <Dropdown.Item href="#/action-1">Miami</Dropdown.Item>
+                <Dropdown.Item href="#/action-2">Detroit</Dropdown.Item>
+                <Dropdown.Item href="#/action-3">Boston</Dropdown.Item>
+              </DropdownButton>
             </div>
           </div>
 
           <div className="row kartu1">
-            <div className="col-sm-4">
-              <div className="card">
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-sm-4 kartu1">
-                      <img src={vektor} alt="" />
+            {this.state.dataSchedule.map((item) => (
+              <div className="col-sm-4">
+                <div className="card">
+                  <div className="card-body" key={item.id}>
+                    <div className="row">
+                      <div className="col-sm-4 kartu1">
+                        <img src={vektor} alt="" />
+                      </div>
+                      <div className="col-sm-8">
+                        <h6>{item.premiere}</h6>
+                        <p>{item.location}</p>
+                      </div>
                     </div>
-                    <div className="col-sm-8">
-                      <h6>ebv.id</h6>
-                      <p>
-                        Whatever street No.12, <br /> South Purwokerto
-                      </p>
+                    <hr className="my-4" />
+                    <div className="row">
+                      {item.time.map((itemTime, index) => (
+                        <Col>
+                          <button
+                            style={{ backgroundColor: "white" }}
+                            key={index}
+                            onClick={() => this.handleTimeSchedule(itemTime)}
+                          >
+                            {itemTime}
+                          </button>{" "}
+                        </Col>
+                      ))}
                     </div>
-                  </div>
-                  <hr className="my-4" />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                  </div>
 
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p>08:30</p>
+                    <div className="row" style={{ marginTop: "20px" }}>
+                      <div className="col-sm-6">
+                        <p>Price</p>
+                      </div>
+                      <div className="col-sm-6">
+                        <h6>{item.price}$</h6>
+                      </div>
                     </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                  </div>
 
-                  <div className="row">
-                    <div className="col-sm-6">
-                      <p>Price</p>
+                    <div className="row">
+                      <button
+                        onClick={() => this.handleBooking(item.id)}
+                        className="btn btn-primary"
+                        type="button"
+                      >
+                        Book Now
+                      </button>
                     </div>
-                    <div className="col-sm-6">
-                      <h6>$10.00/seat</h6>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <button className="btn btn-primary" type="button">
-                      Book Now
-                    </button>
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div className="col-sm-4">
-              <div className="card">
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-sm-4 kartu1">
-                      <img src={vektor} alt="" />
-                    </div>
-                    <div className="col-sm-8">
-                      <h6>ebv.id</h6>
-                      <p>
-                        Whatever street No.12, <br /> South Purwokerto
-                      </p>
-                    </div>
-                  </div>
-                  <hr className="my-4" />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <div className="col-sm-6">
-                      <p>Price</p>
-                    </div>
-                    <div className="col-sm-6">
-                      <h6>$10.00/seat</h6>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <button className="btn btn-primary" type="button">
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-sm-4">
-              <div className="card">
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-sm-4 kartu1">
-                      <img src={vektor} alt="" />
-                    </div>
-                    <div className="col-sm-8">
-                      <h6>ebv.id</h6>
-                      <p>
-                        Whatever street No.12, <br /> South Purwokerto
-                      </p>
-                    </div>
-                  </div>
-                  <hr className="my-4" />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <div className="col-sm-6">
-                      <p>Price</p>
-                    </div>
-                    <div className="col-sm-6">
-                      <h6>$10.00/seat</h6>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <button className="btn btn-primary" type="button">
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
 
-          <div className="row kartu2">
-            <div className="col-sm-4">
-              <div className="card">
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-sm-4 kartu1">
-                      <img src={vektor} alt="" />
-                    </div>
-                    <div className="col-sm-8">
-                      <h6>ebv.id</h6>
-                      <p>
-                        Whatever street No.12, <br /> South Purwokerto
-                      </p>
-                    </div>
-                  </div>
-                  <hr className="my-4" />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <div className="col-sm-6">
-                      <p>Price</p>
-                    </div>
-                    <div className="col-sm-6">
-                      <h6>$10.00/seat</h6>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <button className="btn btn-primary" type="button">
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-sm-4">
-              <div className="card">
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-sm-4 kartu1">
-                      <img src={vektor} alt="" />
-                    </div>
-                    <div className="col-sm-8">
-                      <h6>ebv.id</h6>
-                      <p>
-                        Whatever street No.12, <br /> South Purwokerto
-                      </p>
-                    </div>
-                  </div>
-                  <hr className="my-4" />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <div className="col-sm-6">
-                      <p>Price</p>
-                    </div>
-                    <div className="col-sm-6">
-                      <h6>$10.00/seat</h6>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <button className="btn btn-primary" type="button">
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="col-sm-4">
-              <div className="card">
-                <div className="card-body">
-                  <div className="row">
-                    <div className="col-sm-4 kartu1">
-                      <img src={vektor} alt="" />
-                    </div>
-                    <div className="col-sm-8">
-                      <h6>ebv.id</h6>
-                      <p>
-                        Whatever street No.12, <br /> South Purwokerto
-                      </p>
-                    </div>
-                  </div>
-                  <hr className="my-4" />
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                    <div className="col-sm-3">
-                      <p>08:30</p>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <div className="col-sm-6">
-                      <p>Price</p>
-                    </div>
-                    <div className="col-sm-6">
-                      <h6>$10.00/seat</h6>
-                    </div>
-                  </div>
-
-                  <div className="row">
-                    <button className="btn btn-primary" type="button">
-                      Book Now
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="row tombols">
+          {/* <div className="row tombols">
             <div className="col-sm-12 tombol">
               <button type="button" className="btn btn-outline-primary">
                 1
@@ -597,7 +273,7 @@ class Detail extends Component {
                 4
               </button>
             </div>
-          </div>
+          </div> */}
 
           {/* <hr />
         <h6>List Schedule</h6>

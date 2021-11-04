@@ -3,20 +3,22 @@ import Navbar from "../../../components/Navbar";
 import Card from "../../../components/Card";
 import axios from "../../../utils/axios";
 import Pagination from "react-paginate";
-import "./index.css";
 
 class Home extends Component {
   constructor() {
     super();
     this.state = {
       data: [],
-      page: 1,
-      limit: 3,
+      page: 2,
+      limit: 10,
       pageInfo: {},
       form: {
         name: "",
         category: "",
-        realeasedDate: "",
+        releaseDate: "",
+        cast: "",
+        director: "",
+        duration: "",
         synopsis: "",
         image: null
       }
@@ -48,16 +50,29 @@ class Home extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     // console.log(this.state.form);
-    const formData = new formData();
-
+    const formData = new FormData();
+    // formData.append("name", this.state.form.name);
     for (const data in this.state.form) {
       formData.append(data, this.state.form[data]);
     }
-    // for (const pair of formData.entries()) {
-    //   console.log(pair[0] + ", " + pair[1]);
-    // }
-
-    // axios.post("movie", formData)
+    console.log(formData);
+    console.log(formData.entries());
+    // UNTUK MENGECEK DATA DI DALAM FORMDATA
+    for (const data of formData.entries()) {
+      // [
+      //   [property, value],
+      //   [],
+      // ]
+      console.log(data[0] + ", " + data[1]);
+    }
+    axios
+      .post("http://localhost:3001/movie", formData)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   setUpdate = () => {
@@ -117,47 +132,60 @@ class Home extends Component {
       <div className="container text-center">
         <h1>Home Page</h1>
         <Navbar />
+        <hr />
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
-            placeholder="Input Name..."
+            placeholder="Input Name ..."
             name="name"
             onChange={(event) => this.changeText(event)}
           />
           <br />
           <input
             type="text"
-            placeholder="Input category..."
+            placeholder="Input Category ..."
             name="category"
             onChange={(event) => this.changeText(event)}
           />
           <br />
+          <input type="date" name="releaseDate" onChange={(event) => this.changeText(event)} />
+          <br />
           <input
-            type="date"
-            placeholder="Input Released date..."
-            name="name"
+            type="text"
+            placeholder="Input Cast ..."
+            name="cast"
             onChange={(event) => this.changeText(event)}
           />
           <br />
           <input
             type="text"
-            placeholder="Input Sinopsis..."
-            name="name"
+            placeholder="Input Director ..."
+            name="director"
             onChange={(event) => this.changeText(event)}
           />
           <br />
           <input
-            type="file"
-            placeholder="Input image..."
-            name="image"
-            onChange={(event) => this.changeFile(event)}
+            type="text"
+            placeholder="Input Duration ..."
+            name="duration"
+            onChange={(event) => this.changeText(event)}
           />
           <br />
+          <input
+            type="text"
+            placeholder="Input Synopsis ..."
+            name="synopsis"
+            onChange={(event) => this.changeText(event)}
+          />
+          <br />
+          <input type="file" name="image" onChange={(event) => this.changeFile(event)} />
+          <br />
+          <button type="submit">Submit</button>
         </form>
         <hr />
         <div className="row">
           {data.map((item) => (
-            <div className="col-md-4 item" key={item.id}>
+            <div className="col-md-4" key={item.id}>
               <Card data={item} handleDetail={this.handleDetail} />
             </div>
           ))}

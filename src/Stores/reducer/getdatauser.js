@@ -1,13 +1,13 @@
 const initialState = {
-  idUser: "",
+  dataUser: {},
   isError: false,
   isLoading: false,
   msg: ""
 };
 
-const auth = (state = initialState, action) => {
+const getdatauser = (state = initialState, action) => {
   switch (action.type) {
-    case "LOGIN_PENDING": {
+    case "GETUSER_PENDING": {
       return {
         ...state,
         isLoading: true,
@@ -15,30 +15,27 @@ const auth = (state = initialState, action) => {
         msg: ""
       };
     }
-    case "LOGIN_FULFILLED": {
+    case "GETUSER_FULFILLED": {
       return {
         ...state,
         isLoading: false,
         isError: false,
-        idUser: action.payload.data.data.id, //action.payload = res
+        dataUser: action.payload.data.data[0], //action.payload = res
         msg: action.payload.data.msg
       };
     }
-    case "LOGIN_REJECTED": {
+    case "GETUSER_REJECTED": {
       return {
         ...state,
         isLoading: false,
         isError: true,
-        idUser: "",
         msg: action.payload.response.data.msg
       };
     }
     default: {
-      return {
-        ...state
-      };
+      return state;
     }
   }
 };
 
-export default auth;
+export default getdatauser;

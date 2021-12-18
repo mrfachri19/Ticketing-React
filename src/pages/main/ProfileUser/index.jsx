@@ -1,8 +1,17 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Card, ProgressBar, Nav, Form, Button } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  ProgressBar,
+  Nav,
+  Form,
+  Button,
+} from "react-bootstrap";
 import Header from "../../Header";
 import Footer from "../../Footer";
-import { getdatauser } from "../../../Stores/actions/getdatauser";
+import { getdatauser } from "../../../store/actions/getdatauser";
 import { connect } from "react-redux";
 import image from "../../../assets/image/Ellipse 11.png";
 // import axios from "../../../utils/axios";
@@ -18,14 +27,14 @@ class Profile extends Component {
         lastName: "",
         email: "",
         noTlp: "",
-        image: null
-      }
+        image: null,
+      },
     };
   }
 
   getdatauser = () => {
     this.setState({
-      getdatauser: this.state.getdatauser
+      getdatauser: this.state.getdatauser,
     });
   };
 
@@ -54,21 +63,31 @@ class Profile extends Component {
                     marginLeft: "30px",
                     marginTop: "40px",
                     color: "#4E4B66",
-                    fontSize: "16px"
+                    fontSize: "16px",
                   }}
                 >
                   INFO
                 </h5>
-                <img src={image} rounded style={{ width: "8rem", marginLeft: "80px" }} alt="" />
+                <img
+                  src={image}
+                  rounded
+                  style={{ width: "8rem", marginLeft: "80px" }}
+                  alt=""
+                />
                 <Card.Body>
                   <Card.Title style={{ textAlign: "center" }}>
                     {this.props.getdatauser.firstName}
                   </Card.Title>
-                  <Card.Subtitle className="mb-2 text-muted" style={{ textAlign: "center" }}>
+                  <Card.Subtitle
+                    className="mb-2 text-muted"
+                    style={{ textAlign: "center" }}
+                  >
                     Moviegoers
                   </Card.Subtitle>
                   <hr className="my-4" />
-                  <Card.Subtitle className="mb-2 text-muted">Loyalty Points</Card.Subtitle>
+                  <Card.Subtitle className="mb-2 text-muted">
+                    Loyalty Points
+                  </Card.Subtitle>
                   <Card.Subtitle className="mb-2 text-muted">
                     <div className="card__points">
                       <h5
@@ -76,7 +95,7 @@ class Profile extends Component {
                           fontSize: "16px",
                           color: "white",
                           marginLeft: "20px",
-                          marginTop: "20px"
+                          marginTop: "20px",
                         }}
                       >
                         Moviegores
@@ -86,13 +105,16 @@ class Profile extends Component {
                           fontSize: "20px",
                           color: "white",
                           marginLeft: "20px",
-                          marginTop: "20px"
+                          marginTop: "20px",
                         }}
                       >
                         320 points
                       </p>
                     </div>
-                    <p style={{ marginTop: "20px" }}> 180 points become to Master</p>
+                    <p style={{ marginTop: "20px" }}>
+                      {" "}
+                      180 points become to Master
+                    </p>
                     <ProgressBar variant="primary" now={60} />
                   </Card.Subtitle>
                 </Card.Body>
@@ -155,7 +177,10 @@ class Profile extends Component {
                       </Form.Group>
                       <Form.Group as={Col} controlId="formGridPassword">
                         <Form.Label>New Password</Form.Label>
-                        <Form.Control type="password" placeholder="New Password" />
+                        <Form.Control
+                          type="password"
+                          placeholder="New Password"
+                        />
                       </Form.Group>
                     </Row>
                     <div className="button__profile">
@@ -176,7 +201,7 @@ class Profile extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  getdatauser: state.getdatauser
+  getdatauser: state.getdatauser,
 });
 
 const mapDispatchToProps = { getdatauser };

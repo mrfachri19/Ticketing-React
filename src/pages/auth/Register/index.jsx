@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import tiket from "../../../assets/image/tickitz 1.png";
 import vektor from "../../../assets/image/Vector.png";
@@ -11,11 +12,14 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { login } from "../../../store/actions/auth";
 
-class Login extends Component {
+class Register extends Component {
   constructor() {
     super();
     this.state = {
       form_input: {
+        firstName: "",
+        lastName: "",
+        noTelp: "",
         email: "",
         password: "",
       },
@@ -104,14 +108,46 @@ class Login extends Component {
               </>
             )}
 
-            <h1>Sign In</h1>
+            <h1>Sign Up</h1>
             <p>
-              Sign in with your data that you entered during <br /> your
-              registration
+              Sign Up with your data that you entered during <br /> your Login
             </p>
           </div>
           <div className="row login">
             <Form onSubmit={this.handleSubmitForm} onReset={this.handleReset}>
+              <Form.Group className="mb-3" controlId="formBasicFirstName">
+                <Form.Label>First Name</Form.Label>
+                <input
+                  type="firstName"
+                  className="input__form-login"
+                  id="firstName"
+                  name="firstName"
+                  onChange={this.handleInputForm}
+                  placeholder="Write your First Name"
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicLastName">
+                <Form.Label>Last Name</Form.Label>
+                <input
+                  type="lastName"
+                  className="input__form-login"
+                  id="lastName"
+                  name="lastName"
+                  onChange={this.handleInputForm}
+                  placeholder="Write your Last Name"
+                />
+              </Form.Group>
+              <Form.Group className="mb-3" controlId="formBasicNoTelp">
+                <Form.Label>Phone Number</Form.Label>
+                <input
+                  type="noTelp"
+                  className="input__form-login"
+                  id="noTelp"
+                  name="noTelp"
+                  onChange={this.handleInputForm}
+                  placeholder="Write your Phone Number"
+                />
+              </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicEmail">
                 <Form.Label>Email</Form.Label>
                 <input
@@ -136,7 +172,7 @@ class Login extends Component {
               </Form.Group>
               <div className="d-grid gap-2 form__button">
                 <button type="submit" className="button__signin">
-                  Sign In
+                  Sign Up
                 </button>
               </div>
             </Form>
@@ -180,4 +216,4 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = { login, getdatauser };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

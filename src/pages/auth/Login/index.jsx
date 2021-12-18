@@ -1,78 +1,78 @@
 import React, { Component } from "react";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Button, Form, Jumbotron, Col, Row } from "react-bootstrap";
-import { getdatauser } from "../../../Stores/actions/getdatauser";
-import { Link } from "react-router-dom";
-// import axios from "../../../utils/axios";
-import { connect } from "react-redux";
-import { login } from "../../../Stores/actions/auth";
 import tiket from "../../../assets/image/tickitz 1.png";
 import vektor from "../../../assets/image/Vector.png";
 import facebook from "../../..//assets/image/Vector fac.png";
 import google from "../../..//assets/image/flat-color-icons_google.png";
+import axios from "../../../utils/axios";
+import { Button, Form, Jumbotron, Col, Row, Toast } from "react-bootstrap";
+import { getdatauser } from "../../../store/actions/getdatauser";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { login } from "../../../store/actions/auth";
+
 class Login extends Component {
   constructor() {
     super();
     this.state = {
-      form: {
+      form_input: {
         email: "",
-        password: ""
+        password: "",
       },
+      users: [],
       isError: false,
-      msg: ""
+      msg: "",
     };
   }
 
-  handleChangeForm = (event) => {
-    // console.log("User sedang mengetik");
+  handleInputForm = (event) => {
     this.setState({
-      form: {
-        ...this.state.form,
-        [event.target.name]: event.target.value // email : bagus@gmail.com
-      }
+      form_input: {
+        ...this.state.form_input,
+        [event.target.name]: event.target.value,
+      },
     });
   };
 
-  // getUserById = (id) => {
-  //   axios
-  //     .get(`user/${id}`)
-  //     .then((res) => {
-  //       // console.log(res.data);
-  //       this.setState({
-  //         dataProfile: res.data.data
-  //       });
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.response);
-  //     });
-  //   const user = [];
-  //   const data = JSON.stringify(user[0]); // res.data.data[0]
-  //   localStorage.setItem("dataUser", data);
-
-  //   // UNTUK GET NYA ketika di komponen lain
-  //   // let dataProfile = localStorage.getItem("dataUser");
-  //   // dataProfile = JSON.parse(dataProfile);
-  //   // })
-  // };
-
-  handleSubmit = (event) => {
+  handleSubmitForm = (event) => {
     event.preventDefault();
-    this.props.login(this.state.form).then((res) => {
-      console.log("login");
-      localStorage.setItem("token", res.value.data.data.token);
-      this.props.getdatauser(res.value.data.data.id).then((res) => {
-        this.props.history.push("/homepage");
+    axios
+      .post("auth/login", this.state.form_input)
+      .then((response) => {
+        this.props.GetUser().then((response) => {
+          localStorage.setItem("role", response.value.data.data[0].role);
+          if (response.value.data.data[0].role === "admin") {
+            this.props.history.push("/admin/dashboard");
+          } else {
+            this.props.history.push("/");
+          }
+        });
+        const token = response.data.data.token;
+        const userId = response.data.data.id;
+        localStorage.setItem("user_id", userId);
+        localStorage.setItem("token", token);
+        this.props.history.push("/");
+      })
+      .catch((error) => {
+        this.setState({
+          isError: true,
+          msg: error.response.data.msg,
+        });
+      })
+      .finally(() => {
+        setTimeout(() => {
+          this.setState({
+            isError: false,
+            msg: "",
+          });
+        }, 2000);
       });
-      // console.log(this.props.auth);
-      // console.log(res);
-      // localStorage.setItem("token", this.props.auth.idUser);
-    });
   };
 
   handleReset = (event) => {
     event.preventDefault();
-    // console.log("Reset Form");
+    console.log("Reset Form");
   };
 
   render() {
@@ -82,7 +82,9 @@ class Login extends Component {
           <Jumbotron>
             <div className="jumbotron text-center tiket">
               <img src={tiket} alt="tickitz 1" />
-              <h1 className="display-4">Wait, Watch, Wow !</h1>
+              <div>
+                <h1>Wait, Watch, Wow !</h1>
+              </div>
             </div>
           </Jumbotron>
           <div className="jumbotron__img">
@@ -92,36 +94,51 @@ class Login extends Component {
 
         <Col sm={4} className="form__login">
           <div className="row ">
+            {this.state.isError && (
+              <>
+                <Toast>
+                  <Toast.Header closeButton={false}>
+                    <strong className="me-auto">Tickitz</strong>
+                  </Toast.Header>
+                  <Toast.Body>{this.state.msg}</Toast.Body>
+                </Toast>
+              </>
+            )}
+
             <h1>Sign In</h1>
             <p>
-              Sign in with your data that you entered during <br /> your registration
+              Sign in with your data that you entered during <br /> your
+              registration
             </p>
           </div>
           <div className="row login">
-            <Form onSubmit={this.handleSubmit} onReset={this.handleReset}>
-              {this.state.isError && <div className="alert alert-danger">{this.state.msg}</div>}
+            <Form onSubmit={this.handleSubmitForm} onReset={this.handleReset}>
               <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email </Form.Label>
-                <Form.Control
+                <Form.Label>Email</Form.Label>
+                <input
                   type="email"
-                  placeholder="Enter email"
+                  className="input__form-login"
+                  id="email"
                   name="email"
-                  onChange={this.handleChangeForm}
+                  onChange={this.handleInputForm}
+                  placeholder="Write your email"
                 />
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
-                <Form.Control
+                <input
                   type="password"
-                  placeholder="Password"
+                  className="input__form-login"
+                  id="password"
                   name="password"
-                  onChange={this.handleChangeForm}
+                  onChange={this.handleInputForm}
+                  placeholder="Write your password"
                 />
               </Form.Group>
               <div className="d-grid gap-2 form__button">
-                <Button variant="primary" type="submit" size="lg">
+                <button type="submit" className="button__signin">
                   Sign In
-                </Button>
+                </button>
               </div>
             </Form>
           </div>
@@ -133,13 +150,21 @@ class Login extends Component {
           <div className="row button__login">
             <div className="col-sm-6 form__login-btnlink text-center">
               <Button variant="light">
-                <img src={google} style={{ marginBottom: "2px" }} alt="tickitz 1" />
+                <img
+                  src={google}
+                  style={{ marginBottom: "2px" }}
+                  alt="tickitz 1"
+                />
                 <p style={{ marginLeft: "2px" }}>Google</p>
               </Button>
             </div>
             <div className="col-sm-6 form__login-btnlink text-center">
               <Button variant="light">
-                <img src={facebook} style={{ marginBottom: "2px" }} alt="tickitz 1" />
+                <img
+                  src={facebook}
+                  style={{ marginBottom: "2px" }}
+                  alt="tickitz 1"
+                />
                 <p style={{ marginLeft: "2px" }}>Facebook</p>
               </Button>
             </div>
@@ -151,7 +176,7 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  auth: state.auth
+  auth: state.auth,
 });
 
 const mapDispatchToProps = { login, getdatauser };

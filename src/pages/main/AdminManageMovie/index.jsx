@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Card from "../../../components/Card";
 import axios from "../../../utils/axios";
 import Pagination from "react-paginate";
-import movie from "../../../Stores/reducer/movie";
+import movie from "../../../store/reducer/movie";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import Header from "../../Header";
@@ -27,8 +27,8 @@ class ManageMovie extends Component {
         director: "",
         duration: "",
         synopsis: "",
-        image: null
-      }
+        image: null,
+      },
     };
   }
 
@@ -40,8 +40,8 @@ class ManageMovie extends Component {
     this.setState({
       form: {
         ...this.state.form,
-        [event.target.name]: event.target.value
-      }
+        [event.target.name]: event.target.value,
+      },
     });
   };
 
@@ -49,8 +49,8 @@ class ManageMovie extends Component {
     this.setState({
       form: {
         ...this.state.form,
-        [event.target.name]: event.target.files[0]
-      }
+        [event.target.name]: event.target.files[0],
+      },
     });
   };
 
@@ -102,7 +102,7 @@ class ManageMovie extends Component {
         // console.log(res.data);
         this.setState({
           data: res.data.data,
-          pageInfo: res.data.pagination
+          pageInfo: res.data.pagination,
         });
       })
       .catch((err) => {
@@ -115,7 +115,7 @@ class ManageMovie extends Component {
     const selectedPage = event.selected + 1;
     this.setState(
       {
-        page: selectedPage
+        page: selectedPage,
       },
       () => {
         this.getDataMovie();
@@ -213,8 +213,15 @@ class ManageMovie extends Component {
           </Row>
           <Row>
             <Form onSubmit={this.handleSubmit}>
-              <input type="file" name="image" onChange={(event) => this.changeFile(event)} />
-              <Form.Group className="mb-3 mt-3" controlId="exampleForm.ControlTextarea1">
+              <input
+                type="file"
+                name="image"
+                onChange={(event) => this.changeFile(event)}
+              />
+              <Form.Group
+                className="mb-3 mt-3"
+                controlId="exampleForm.ControlTextarea1"
+              >
                 <Form.Label>Synopsis</Form.Label>
                 <Form.Control
                   as="textarea"
@@ -227,7 +234,11 @@ class ManageMovie extends Component {
               </Form.Group>
 
               <Col style={{ textAlign: "right" }}>
-                <Button variant="primary" type="submit" style={{ marginRight: "20px" }}>
+                <Button
+                  variant="primary"
+                  type="submit"
+                  style={{ marginRight: "20px" }}
+                >
                   Submit
                 </Button>
                 <Button variant="primary" type="submit">
@@ -261,7 +272,7 @@ class ManageMovie extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  movie: state.movie
+  movie: state.movie,
 });
 
 const mapDispatchToProps = { movie };

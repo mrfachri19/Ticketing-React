@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Button } from "react-bootstrap";
 import { connect } from "react-redux";
-import { increaseCounter } from "../../../Stores/actions/counter";
+import { increaseCounter } from "../../../store/actions/counter";
 
 const Counter = (props) => {
   const [count, setCount] = useState(0);
@@ -52,11 +52,11 @@ const Counter = (props) => {
 };
 
 const mapStateToProps = (state) => ({
-  counter: state.counter
+  counter: state.counter,
 });
 
 const mapDispatchToProps = {
-  increaseCounter
+  increaseCounter,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);

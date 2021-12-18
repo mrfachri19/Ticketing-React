@@ -44,7 +44,7 @@
     background-image: url(../../../assets/image/Group\ 10.png);
     object-fit: cover;
     display: flex;
-    height: 990px;
+    height: 1024px;
     width: 98%;
   }
 
@@ -69,13 +69,13 @@
   }
 
   .form__login {
-    margin-top: 160px !important;
+    margin-top: 50px !important;
     margin-left: 43px !important;
     padding-right: 0;
   }
 
   .login {
-    margin-top: 45px !important;
+    margin-top: 15px !important;
   }
   .input__form-login {
     background-color: #fcfdfe;
@@ -93,14 +93,14 @@
     width: 100%;
     padding: 16px 16px;
     font-weight: 600;
-    margin-top: 10px;
+    margin-top: 0px;
     border-radius: 16px;
     background-color: #5f2eea;
     border: none;
     color: #fff;
   }
   .form__button {
-    margin-top: 48px;
+    margin-top: 38px;
   }
   .form__login-reset {
     margin-top: 32px !important;
@@ -110,7 +110,7 @@
     display: inline-block;
   }
   .form__login-btnlink Button {
-    margin-top: 55px !important;
+    margin-top: 35px !important;
     width: 180px !important;
     height: 64px;
     border-radius: 10px;

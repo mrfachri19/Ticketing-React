@@ -6,7 +6,29 @@ button.nav__brand.navbar-toggler.collapsed {
 }
 
 .navbar__tiket img {
-  width: 10rem;
+  width: 120px;
+  height: 31px;
+}
+.navigation__homepage-search-movie {
+  background-color: #f5f6f8;
+  color: black;
+  padding: 12px;
+  border-radius: 3px;
+  text-align: left;
+  position: absolute;
+  width: 100%;
+  cursor: default;
+}
+.navigation__homepage-search-movie-link {
+  border: none;
+  background-color: transparent;
+  color: #414141;
+}
+.navigation__homepage-search-movie-link:hover {
+  border-bottom: 3px solid #414141;
+  margin: 0;
+  padding: 0;
+  color: #414141;
 }
 
 /* dekstop */

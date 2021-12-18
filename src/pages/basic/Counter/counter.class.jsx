@@ -1,26 +1,26 @@
 import React, { Component } from "react";
 import { Container, Button } from "react-bootstrap";
 import { connect } from "react-redux";
-import { increaseCounter } from "../../../Stores/actions/counter";
+import { increaseCounter } from "../../../store/actions/counter";
 import Navbar from "../../../components/Navbar";
 class Counter extends Component {
   constructor() {
     super();
     this.state = {
       count: 0,
-      isShow: true
+      isShow: true,
     };
   }
 
   increaseCounter = () => {
     this.setState({
-      count: this.state.count + 1
+      count: this.state.count + 1,
     });
   };
 
   decreaseCounter = () => {
     this.setState({
-      count: this.state.count - 1
+      count: this.state.count - 1,
     });
   };
 
@@ -59,7 +59,10 @@ class Counter extends Component {
           RESET
         </Button>
         {!disabled && (
-          <Button variant="primary" onClick={() => this.props.increaseCounter(2)}>
+          <Button
+            variant="primary"
+            onClick={() => this.props.increaseCounter(2)}
+          >
             +
           </Button>
         )}
@@ -69,7 +72,7 @@ class Counter extends Component {
 }
 // =====
 const mapStateToProps = (state) => ({
-  counter: state.counter
+  counter: state.counter,
   // properti digunakan untuk pemanggilan data di dalam jsx
   // value harus mengambil dari reducer
   // counter: {
@@ -78,7 +81,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = {
-  increaseCounter
+  increaseCounter,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Counter);

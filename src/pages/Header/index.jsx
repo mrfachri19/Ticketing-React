@@ -7,6 +7,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./index.css";
 import tiket from "../../assets/image/Vector.png";
 import { Link, withRouter } from "react-router-dom";
+import { connect } from "react-redux";
+import { GetUser } from "../../store/actions/user";
 import axios from "../../utils/axios";
 
 class Header extends Component {
@@ -73,6 +75,8 @@ class Header extends Component {
   render() {
     const token = localStorage.getItem("token");
 
+    const { user } = this.props;
+    const { image } = user.users;
     // console.log(this.props);
     // console.log(this.state);
     return (
@@ -93,33 +97,48 @@ class Header extends Component {
             <Nav className="me-auto">
               {this.state.role !== "admin" ? (
                 <>
-                  <Link to="/" className="d-none d-md-inline-block mx-5">
+                  <Link
+                    to="/"
+                    className="d-none d-md-inline-block mx-5"
+                    style={{ textDecoration: "none", color: "#414141" }}
+                  >
                     Home
                   </Link>
-                  <Link to="/payment" className="mx-4 d-none d-md-inline-block">
+                  <Link
+                    to="/payment"
+                    className="mx-4 d-none d-md-inline-block"
+                    style={{ textDecoration: "none", color: "#414141" }}
+                  >
                     Payment
                   </Link>
-                  <Link to="/profile" className="mx-4 d-none d-md-inline-block">
+                  <Link
+                    to="/profile"
+                    className="mx-4 d-none d-md-inline-block"
+                    style={{ textDecoration: "none", color: "#414141" }}
+                  >
                     Profile
                   </Link>
                 </>
               ) : (
                 <>
                   <Link
-                    to="/admin/dashboard"
+                    to="/dashboard"
                     className="d-none d-md-inline-block mx-5"
+                    style={{ textDecoration: "none", color: "#414141" }}
                   >
                     Dashboard
                   </Link>
                   <Link
-                    to="/admin/manage-movie"
+                    to="/managemovie"
                     className="mx-4 d-none d-md-inline-block"
+                    style={{ textDecoration: "none", color: "#414141" }}
                   >
                     Manage Movie
                   </Link>
                   <Link
-                    to="/admin/manage-schedule"
+                    to="/manageschedule"
                     className="mx-4 d-none d-md-inline-block"
+                    style={{ textDecoration: "none", color: "#414141" }}
                   >
                     Manage Schedule
                   </Link>
@@ -132,10 +151,8 @@ class Header extends Component {
                 className="justify-content-end"
                 style={{ marginRight: "30px" }}
               >
-                <NavDropdown.Item href="#action/3.1">Jakarta</NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.2">Medan </NavDropdown.Item>
-                <NavDropdown.Item href="#action/3.3">
-                  Yogyakarta
+                <NavDropdown.Item href="#action/3.1">
+                  Indonesia
                 </NavDropdown.Item>
               </NavDropdown>
               <button
@@ -189,8 +206,13 @@ class Header extends Component {
               <div className="mx-3 d-none d-md-inline-flex">
                 {token !== null ? (
                   <img
-                    src={elips}
-                    className="img-fluid w-50"
+                    src={
+                      image
+                        ? `${process.env.REACT_APP_PROD}uploads/user/${image}`
+                        : "https://inspektorat.kotawaringinbaratkab.go.id/public/uploads/user/default-user-imge.jpeg"
+                    }
+                    className="img-fluid"
+                    style={{ width: 50, borderRadius: 100 }}
                     alt="Profile"
                     onClick={this.handleProfile}
                   />
@@ -223,4 +245,12 @@ class Header extends Component {
   }
 }
 
-export default withRouter(Header);
+const mapStateToProps = (state) => ({
+  user: state.user,
+});
+
+const mapDispatchToProps = {
+  GetUser,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header));

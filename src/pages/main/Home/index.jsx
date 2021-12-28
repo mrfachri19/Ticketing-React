@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import Header from "../../Header/index";
 import Footer from "../../Footer/index";
-import Cards from "../../../components/Cardhome";
 import axios from "../../../utils/axios";
 import "./index.css";
 import banner from "../../../assets/image/Group 14.png";
-import lion from "../../../assets/image/Rectangle 119.1.png";
-import widow from "../../../assets/image/Rectangle 139-4.png";
-import { Button, Card, Col, Row, Form, Container } from "react-bootstrap";
+import { Button, Col, Row, Form, Container } from "react-bootstrap";
 
 // import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -16,58 +13,44 @@ class Home extends Component {
   constructor() {
     super();
     this.state = {
-      data: [],
+      movies: [],
       page: 1,
-      limit: 6,
-      pageInfo: {}
+      limit: 20,
+      isError: false,
+      message: "",
     };
   }
 
   componentDidMount() {
-    this.getDataMovie();
-  }
-
-  getDataMovie = () => {
     axios
-      .get(`movie?page=${this.state.page}&limit=${this.state.limit}`)
-      .then((res) => {
-        // console.log(res.data);
+      .get("movie", this.state.movies)
+      .then((response) => {
         this.setState({
-          data: res.data.data,
-          pageInfo: res.data.pagination
+          movies: response.data.data,
         });
       })
-      .catch((err) => {
-        console.log(err.response);
+      .catch((error) => {
+        this.setState({
+          isError: true,
+          message: error.response.data.message,
+        });
       });
+  }
+  handleLinkDetailMovie = (id) => {
+    const { movies } = this.state;
+    const data = movies.filter((value) => value.id === id);
+    const detailData = data[0];
+    localStorage.setItem("nameMovie", detailData.name);
+    this.props.history.push(`/detail/${id}`);
   };
 
-  handlePagination = (event) => {
-    // console.log(event.selected + 1);
-    const selectedPage = event.selected + 1;
-    this.setState(
-      {
-        page: selectedPage
-      },
-      () => {
-        this.getDataMovie();
-      }
-    );
-  };
-
-  handleDetail = (data) => {
-    // [1] = bisa digunakan biasanya untuk url params
-    // this.props.history.push(`/basic-detail?movieId=${data}`);
-    // [2] = bisa digunakan jika data tidak mau ditampilkan di url
-    // this.props.history.push("/basic-detail", { movieId: data });
-    // [3] =bisa digunakan untuk detail product/data
-    this.props.history.push(`/detail/${data}`);
-    // console.log(data);
+  handleNotBookNow = () => {
+    this.props.history.push("/");
   };
 
   render() {
-    // console.log(this.state.data);
-    const { data } = this.state;
+    const { movies } = this.state;
+    console.log(movies);
     return (
       <div>
         <Header />
@@ -98,78 +81,43 @@ class Home extends Component {
 
           <div classNameName="row">
             <div className="kartu">
-              <div className="border__card">
-                <Card style={{ width: "13rem" }}>
-                  <Card.Img variant="top" src={lion} />
-                  <Card.Body className="border__card-hover">
-                    <Card.Title className="title">Lion King</Card.Title>
-                    <Card.Text className="text">
-                      <p>Action, Sci-fi, Adventure</p>
-                    </Card.Text>
-                    <Button variant="primary">Detail</Button>
-                  </Card.Body>
-                </Card>
-              </div>
-              <div className="border__card">
-                <Card style={{ width: "13rem" }}>
-                  <Card.Img variant="top" src={widow} />
-                  <Card.Body className="border__card-hover">
-                    <Card.Title className="title">Tenet</Card.Title>
-                    <Card.Text className="text">
-                      <p>Action, Sci-fi</p>
-                    </Card.Text>
-                    <Button variant="primary">Detail</Button>
-                  </Card.Body>
-                </Card>
-              </div>
-              <div className="border__card">
-                <Card style={{ width: "13rem" }}>
-                  <Card.Img variant="top" src={lion} />
-                  <Card.Body className="border__card-hover">
-                    <Card.Title className="title">Lion King</Card.Title>
-                    <Card.Text className="text">
-                      <p>Action, Sci-fi, Adventure</p>
-                    </Card.Text>
-                    <Button variant="primary">Detail</Button>
-                  </Card.Body>
-                </Card>
-              </div>
-              <div className="border__card">
-                <Card style={{ width: "13rem" }}>
-                  <Card.Img variant="top" src={lion} />
-                  <Card.Body className="border__card-hover">
-                    <Card.Title className="title">Lion King</Card.Title>
-                    <Card.Text className="text">
-                      <p>Action, Sci-fi, Adventure</p>
-                    </Card.Text>
-                    <Button variant="primary">Detail</Button>
-                  </Card.Body>
-                </Card>
-              </div>
-              <div className="border__card">
-                <Card style={{ width: "13rem" }}>
-                  <Card.Img variant="top" src={lion} />
-                  <Card.Body className="border__card-hover">
-                    <Card.Title className="title">Lion King</Card.Title>
-                    <Card.Text className="text">
-                      <p>Action, Sci-fi, Adventure</p>
-                    </Card.Text>
-                    <Button variant="primary">Detail</Button>
-                  </Card.Body>
-                </Card>
-              </div>
-              <div className="border__card">
-                <Card style={{ width: "13rem" }}>
-                  <Card.Img variant="top" src={lion} />
-                  <Card.Body className="border__card-hover">
-                    <Card.Title className="title">Lion King</Card.Title>
-                    <Card.Text className="text">
-                      <p>Action, Sci-fi, Adventure</p>
-                    </Card.Text>
-                    <Button variant="primary">Detail</Button>
-                  </Card.Body>
-                </Card>
-              </div>
+              {movies.length > 0 ? (
+                movies.map((movie) => (
+                  <div
+                    className="movies__list--card col-sm-6 col-md-2 mx-3"
+                    key={movie.id}
+                  >
+                    <img
+                      src={`${
+                        process.env.REACT_APP_NAME === "dev"
+                          ? `${process.env.REACT_APP_DEV}uploads/movie/${movie.image}`
+                          : `${process.env.REACT_APP_PROD}uploads/movie/${movie.image}`
+                      }`}
+                      className="movies__list-image img-fluid"
+                      alt={movie.name}
+                    />
+                    <div className="movies__list--card-hover text-center">
+                      <h2>{movie.name}</h2>
+                      <p>{movie.category}</p>
+
+                      <button
+                        className="movies__list--card-hover-btn-details"
+                        onClick={() => this.handleLinkDetailMovie(movie.id)}
+                      >
+                        Details
+                      </button>
+                      <button
+                        className="movies__list--card-hover-btn"
+                        onClick={this.handleNotBookNow}
+                      >
+                        Book Now
+                      </button>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p className="text-center fs-2">Movies Not Found!</p>
+              )}
             </div>
           </div>
 
@@ -251,11 +199,43 @@ class Home extends Component {
 
           <div className="row">
             <div className="kartu">
-              {data.map((item) => (
-                <div className="border__card" key={item.id}>
-                  <Cards data={item} handleDetail={this.handleDetail} />
-                </div>
-              ))}
+              {movies.length > 0 ? (
+                movies.map((movie) => (
+                  <div
+                    className="movies__list--card col-sm-6 col-md-2 mx-3"
+                    key={movie.id}
+                  >
+                    <img
+                      src={`${
+                        process.env.REACT_APP_NAME === "dev"
+                          ? `${process.env.REACT_APP_DEV}uploads/movie/${movie.image}`
+                          : `${process.env.REACT_APP_PROD}uploads/movie/${movie.image}`
+                      }`}
+                      className="movies__list-image img-fluid"
+                      alt={movie.title}
+                    />
+                    <div className="movies__list--card-hover text-center">
+                      <h2>{movie.title}</h2>
+                      <p>{movie.category}</p>
+
+                      <button
+                        className="movies__list--card-hover-btn-details"
+                        onClick={() => this.handleLinkDetailMovie(movie.id)}
+                      >
+                        Details
+                      </button>
+                      <button
+                        className="movies__list--card-hover-btn"
+                        onClick={this.handleNotBookNow}
+                      >
+                        Book Now
+                      </button>
+                    </div>
+                  </div>
+                ))
+              ) : (
+                <p className="text-center fs-2">Movies Not Found!</p>
+              )}
             </div>
           </div>
           <Row>
@@ -268,7 +248,10 @@ class Home extends Component {
                   <Form>
                     <Row className="align-items-center">
                       <Col sm={{ span: 2, offset: 4 }} className="my-1">
-                        <Form.Control id="inlineFormInputName" placeholder="Type Your Email" />
+                        <Form.Control
+                          id="inlineFormInputName"
+                          placeholder="Type Your Email"
+                        />
                       </Col>
                       <Col xs="auto" className="my-1">
                         <Button type="submit">Submit</Button>

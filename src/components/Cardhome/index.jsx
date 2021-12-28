@@ -22,11 +22,10 @@ class CardMovie extends Component {
             }
           />
           <Card.Body>
-            <Card.Title>{name}</Card.Title>
-            <Card.Text>{category}</Card.Text>
+            <Card.Title style={{ textAlign: "center" }}>{name}</Card.Title>
+            <Card.Text style={{ textAlign: "center" }}>{category}</Card.Text>
             <Button
               variant="primary"
-              style={{ widht: "80px", marginLeft: "30px" }}
               onClick={() => this.props.handleDetail(id)}
             >
               Detail

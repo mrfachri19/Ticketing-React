@@ -1,0 +1,278 @@
+.manage__schedule {
+  padding: 50px 92px;
+  background-color: #f5f6f8;
+}
+.manage__schedule-form-card {
+  background-color: #ffffff;
+  border-radius: 24px;
+  padding: 42px;
+  display: flex;
+}
+.manage__schedule-form-card-body {
+  padding: 24px;
+  width: 45%;
+  background: #ffffff;
+  border: 0.5px solid #dedede;
+  border-radius: 16px;
+}
+.manage__schedule-form-card-row {
+  padding: 0px 32px;
+}
+.manage__schedule-form-card-input {
+  width: 100%;
+  background: #fcfdfe;
+  border: 1px solid #dedede;
+  border-radius: 16px;
+  padding: 16px 20px;
+  color: #4e4b66;
+  font-size: 16px;
+}
+.manage__shcedule-form-card-image {
+  width: 100px;
+  cursor: pointer;
+  margin: 0px 20px;
+}
+.manage__schedule-form-card-image-active {
+  border: 2px solid #5f2eea;
+  border-radius: 8px;
+}
+.manage__schedule-form-card-premiere {
+  margin: 20px 0px;
+  display: flex;
+}
+
+.manage__schedule-form-card-time-button {
+  border: 1px solid #5f2eea;
+  background-color: transparent;
+  padding: 0px 8px;
+  border-radius: 8px;
+  margin: 0px 40px 0px 0px;
+}
+
+.manage__schedule-form-card-time-select-time {
+  color: #4e4b66;
+  cursor: pointer;
+  font-weight: 600;
+  width: 0;
+  border: none;
+  background-color: transparent;
+}
+.manage__schedule-form-title {
+  color: #000000;
+  font-weight: bold;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+.manage__schedule-list {
+  margin: 40px 0px;
+  background-color: #ffffff;
+  border-radius: 6px;
+  padding: 32px;
+  display: flex;
+  justify-content: space-between;
+}
+.manage__schedule-list-card {
+  background-color: #ffffff;
+  border: 0.5px solid #dedede;
+  border-radius: 8px;
+  padding: 24px;
+}
+.manage__schedule-list-card-header {
+  display: flex;
+}
+.manage__schedule-list-card-image {
+  width: 70%;
+  margin: 10px 5px;
+  object-fit: contain;
+}
+.manage__schedule-list-card-premiere {
+  padding: 0px 0px 0px 20px;
+}
+.manage__schedule-list-card-premiere span:nth-child(1) {
+  color: #000000;
+  font-weight: 600;
+  font-size: 24px;
+}
+.manage__schedule-list-card-premiere span:nth-child(2) {
+  color: #6e7191;
+  font-weight: 300;
+  font-size: 12px;
+}
+.manage__schedule-list-card-body {
+  padding: 10px;
+}
+.manage__movie-list-card-time-title {
+  color: #4e4b66;
+  font-weight: 600;
+}
+.manage__movie-list-card-time-title-not-active {
+  color: #a0a3bd;
+  font-weight: 600;
+}
+.manage__schedule-list-card-price {
+  display: flex;
+  margin: 10px 0px;
+  padding: 6px;
+  justify-content: space-between;
+}
+.manage__schedule-list-card-price span:nth-child(1) {
+  color: #6b6b6b;
+  font-size: 16px;
+}
+.manage__schedule-list-card-price span:nth-child(2) {
+  color: #000000;
+  font-weight: bold;
+  font-size: 16px;
+}
+.manage__schedule-list-card-parent {
+  display: flex;
+  margin: 30px 0px 0px 0px;
+  justify-content: space-between;
+}
+.manage__schedule-list-card-button-active {
+  border: 1px solid #5f2eea;
+  border-radius: 4px;
+  color: #5f2eea;
+  width: 50%;
+  background-color: transparent;
+  padding: 3px;
+}
+.manage__schedule-list-card-button {
+  border: 1px solid #ed2e7e;
+  border-radius: 4px;
+  color: #ed2e7e;
+  width: 48%;
+  background-color: transparent;
+  padding: 3px;
+}
+.manage__schedule-form-card-button-reset {
+  padding: 8px 0px;
+  border: none;
+  width: 40%;
+  border: 2px solid #5f2eea;
+  box-shadow: 0px 8px 24px rgba(95, 46, 234, 0.24);
+  border-radius: 4px;
+  color: #5f2eea;
+  font-weight: bold;
+  font-size: 16px;
+}
+.manage__schedule-form-card-button-submit {
+  padding: 12px;
+  color: #ffffff;
+  font-weight: bold;
+  font-size: 14px;
+  background-color: #5f2eea;
+  box-shadow: 0px 8px 24px rgba(95, 46, 234, 0.24);
+  border-radius: 4px;
+  border: none;
+  width: 40%;
+}
+.manage__schedule-form-card-image-parent-active {
+  border: 2px solid #5f2eea;
+  margin: 3px;
+}
+.manage__schedule-container {
+  margin: 40px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.manage__schedule-container h3 {
+  margin-bottom: 0px;
+  display: flex;
+}
+.manage__schedule-form-card-time-select-time-active {
+  background-color: #5f2eea;
+  color: #ffffff;
+  border-radius: 4px;
+}
+.manage__schedule-form {
+  background-color: #fcfdfe;
+  border: 1px solid #dedede;
+  border-radius: 16px;
+  padding: 8px 24px;
+  margin: 0px 10px;
+  color: #4e4b66;
+  font-weight: normal;
+  font-size: 16px;
+}
+
+@media (max-width: 575.98px) {
+  .manage__schedule {
+    padding: 0;
+    padding: 24px 12px;
+  }
+  .manage__schedule-form {
+    margin: 0;
+  }
+  .manage__schedule-form-card {
+    padding: 0;
+    flex-direction: column;
+  }
+  .manage__schedule-form-card-body {
+    width: 70%;
+    margin: 20px auto;
+  }
+  .manage__schedule-form-card-input {
+    width: 100%;
+  }
+  .manage__schedule-form-card-row {
+    padding: 0;
+  }
+  .manage__shcedule-form-card-image {
+    width: 50px;
+    object-fit: contain;
+  }
+  .manage__schedule-form-card-time {
+    flex-direction: row;
+  }
+  .manage__schedule-form-card-time-select-time-column {
+    display: flex;
+  }
+  .manage__schedule-form-card-time-select-time {
+    margin: 10px 40px 0px 10px;
+  }
+  .manage__schedule-form-card-button-column {
+    flex-direction: column;
+  }
+  .manage__schedule-form-card-button-reset {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  .manage__schedule-form-card-button-submit {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  .manage__schedule-form-card-button-disabled {
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  .manage__schedule-container {
+    flex-direction: column;
+  }
+  .manage__schedule-form {
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 5px;
+  }
+  .manage__schedule-list {
+    padding: 0;
+    flex-direction: column;
+  }
+  .manage__schedule-list-card-image {
+    width: 50%;
+  }
+  .manage__schedule-list-card {
+    width: 90% !important;
+  }
+  .manage__schedule-list-card-header {
+    flex-direction: column;
+  }
+  .manage__schedule-list-card-premiere {
+    margin-top: 10px;
+    text-align: center;
+  }
+  .manage__schedule-list-card-time-title {
+    width: 20% !important;
+  }
+}

@@ -1,0 +1,11 @@
+.nums_col-text {
+  padding-right: 18px !important;
+  color: #4e4b66;
+  font-weight: 600;
+}
+
+@media (max-width: 575.98px) {
+  .nums_col-text {
+    display: none;
+  }
+}

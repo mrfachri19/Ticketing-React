@@ -67,6 +67,7 @@ class App extends Component {
               <Route path="/register" exact component={Register} />
               <Route path="/login" exact component={Login} />
               <Route path="/" exact component={Home} />
+
               <PrivateRoute path="/detail/:movieId" exact component={Detail} />
               <PrivateRoute path="/order" exact component={Order} />
               <PrivateRoute path="/payment" exact component={Payment} />

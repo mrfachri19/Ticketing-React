@@ -1,47 +1,229 @@
 * {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.pagination {
+  margin: 15px auto;
+  display: flex;
+  list-style: none;
+  outline: none;
+}
+.pagination__disabled {
+  color: rgb(198, 197, 202);
+  border-color: rgb(198, 197, 202);
+}
+.pagination > .pagination__active > a {
+  background-color: #47ccde;
+  border-color: #47ccde;
+  color: #fff;
+}
+.pagination > li > a {
+  border: 1px solid #47ccde;
+  padding: 5px 10px;
+  outline: none;
+  cursor: pointer;
+}
+.pagination > .pagination__active > a,
+.pagination > .pagination__active > span,
+.pagination > .pagination__active > a:hover,
+.pagination > .pagination__active > span:hover,
+.pagination > .pagination__active > a:focus,
+.pagination > .pagination__active > span:focus {
+  background-color: #47ccde;
+  border-color: #47ccde;
+  outline: none;
+}
+.pagination > li > a,
+.pagination > li > span {
+  color: #47ccde;
+}
+.pagination > li:first-child > a,
+.pagination > li:first-child > span,
+.pagination > li:last-child > a,
+.pagination > li:last-child > span {
+  border-radius: unset;
+}
+@import url("https://fonts.googleapis.com/css2?family=Mulish:wght@200;300;400;500;600;700&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css");
+
+* {
+  font-family: "Mulish", sans-serif;
+}
+
+.navigation__homepage-search-movie {
+  background-color: #f5f6f8;
+  color: #ffffff;
+  padding: 12px;
+  border-radius: 3px;
+  text-align: left;
+  position: absolute;
+  width: 100%;
+  cursor: default;
+}
+.navigation__homepage-search-movie-link {
+  border: none;
+  background-color: transparent;
+  color: #414141;
+}
+.navigation__homepage-search-movie-link:hover {
+  border-bottom: 3px solid #414141;
+  margin: 0;
+  padding: 0;
+  color: #414141;
+}
+/* END HOME */
+
+/* @media (max-width: 575.98px) {
+  .movies__list--card-main {
+    overflow-x: auto;
+  }
+  .upcomming__movies-list-main {
+    overflow-x: auto;
+  }
+  .upcomming__movies--button-parent {
+    overflow-x: auto;
+  }
+  header {
+    width: 100%;
+  }
+  .navigation__homepage {
+    padding: 24px 16px;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 16px rgba(186, 186, 186, 0.08);
+  }
+  .navigation__homepage--mobile {
+    background-color: #ffffff;
+    height: 300px;
+    width: 100%;
+  }
+  .navigation__homepage-button-icon-mobile {
+    display: block;
+    border: none;
+    background-color: transparent;
+  }
+  .navigation__homepage--image {
+    width: 80px;
+  }
+  .title__nowshowing {
+    font-size: 18px;
+  }
+  .allmovie__nowshowing {
+    margin: 0px;
+    text-decoration: none;
+  }
+  .hero__spacing--column-left {
+    margin: 30px 0px;
+    padding: 36px;
+  }
+  .hero__image--banner {
+    margin: 0px 0px 120px 0px;
+    width: 100%;
+  }
+  main {
+    width: 100%;
+  }
+  .join__tickitz--input {
+    width: 85%;
+  }
+  .join__tickitz--button {
+    width: 85%;
+  }
+  .join__tickitz--title {
+    font-size: 20px;
+  }
+  .footer__tickitz {
     margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+    padding: 20px;
   }
-  
-  .pagination {
-    margin: 15px auto;
-    display: flex;
-    list-style: none;
-    outline: none;
+  .join__tickitz--subtitle {
+    font-size: 48px;
   }
-  .pagination__disabled {
-    color: rgb(198, 197, 202);
-    border-color: rgb(198, 197, 202);
+  .join__tickitz--input {
+    margin: 30px 0px;
   }
-  .pagination > .pagination__active > a {
-    background-color: #47ccde;
-    border-color: #47ccde;
-    color: #fff;
+  .footer__tickitz--explore--menu {
+    flex-wrap: wrap;
+    align-items: center;
   }
-  .pagination > li > a {
-    border: 1px solid #47ccde;
-    padding: 5px 10px;
-    outline: none;
-    cursor: pointer;
+  .footer__tickitz--explore h6 {
+    margin: 0px 12px;
   }
-  .pagination > .pagination__active > a,
-  .pagination > .pagination__active > span,
-  .pagination > .pagination__active > a:hover,
-  .pagination > .pagination__active > span:hover,
-  .pagination > .pagination__active > a:focus,
-  .pagination > .pagination__active > span:focus {
-    background-color: #47ccde;
-    border-color: #47ccde;
-    outline: none;
+  .footer__tickitz--link {
+    text-align: center;
+    padding: 0px 12px;
+    margin: 0px 4px;
+    text-align: center;
+    color: #6e7191;
+    display: block;
   }
-  .pagination > li > a,
-  .pagination > li > span {
-    color: #47ccde;
+  .footer__tickitz--sponsor_mobile-column a:nth-child(1) {
+    margin: 0px 0px;
   }
-  .pagination > li:first-child > a,
-  .pagination > li:first-child > span,
-  .pagination > li:last-child > a,
-  .pagination > li:last-child > span {
-    border-radius: unset;
+  .footer__tickitz--sponsor_mobile-column a:nth-child(2) {
+    margin: 0px 24px;
   }
+  .footer__tickitz--sponsor_mobile-column a:nth-child(3) {
+    margin: 0px 24px;
+  }
+  .footer__tickitz--brand {
+    margin: 120px 0px 0px;
+    padding: 10px;
+  }
+  .footer__tickitz--sponsor_mobile {
+    margin: 35px 0px 0px;
+    padding: 10px;
+  }
+  .footer__tickitz--sponsor {
+    width: 77.66px;
+  }
+  .footer__tickitz--title-follow-us_mobile {
+    margin: 25px 0px 0px;
+    padding: 10px;
+  }
+  .footer__tickitz--title-follow-us {
+    display: none;
+  }
+  .footer__tickitz--icon-link {
+    margin: auto 16px;
+  }
+  .footer__tickitz--title-copyright {
+    text-align: left;
+  }
+  .movies__list--card-hover:hover {
+    display: none;
+  }
+  .movies__list--card {
+    padding: 24px;
+    width: 50%;
+  }
+  .upcomming__movies-list {
+    width: 55%;
+    margin: 0px 10px;
+  }
+
+  .upcomming__movies--desc {
+    font-size: 11px;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .navigation__homepage--mobile {
+    background-color: #ffffff;
+    height: 370px;
+    width: 100%;
+    box-shadow: 0px 4px 16px rgba(186, 186, 186, 0.08);
+  }
+}
+
+@media (max-width: 991.98px) {
+  .navigation__homepage--mobile {
+    display: none;
+  }
+  .navigation__homepage-button-icon-mobile {
+    display: block;
+    border: none;
+    background-color: transparent;
+  }
+}  */

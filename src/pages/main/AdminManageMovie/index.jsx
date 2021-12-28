@@ -1,280 +1,291 @@
-import React, { Component } from "react";
-import Card from "../../../components/Card";
-import axios from "../../../utils/axios";
-import Pagination from "react-paginate";
-import movie from "../../../store/reducer/movie";
-import { Container, Row, Col, Form, Button } from "react-bootstrap";
+import React, { useEffect, useRef, useState } from "react";
+import { Container } from "react-bootstrap";
 import { connect } from "react-redux";
+import {
+  createMovie,
+  getAllMovie,
+  updateMovie,
+} from "../../../store/actions/movie";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Header from "../../Header";
 import Footer from "../../Footer";
-import spiderman from "../../../assets/image/Rectangle 119.1.png";
+import DataListMovie from "../../../components/Data-MovieList";
+import "./index.css";
 
-// import "./index.css";
+function ManageMovie(props) {
+  useEffect(() => {
+    const role = localStorage.getItem("role");
+    if (role !== "admin") {
+      props.history.push("/");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  // eslint-disable-next-line no-unused-vars
+  const [displayImage, setDisplayImage] = useState("");
+  const [dataFormMovie, setFormMovie] = useState({
+    name: "",
+    category: "",
+    director: "",
+    cast: "",
+    releaseDate: "",
+    duration: "",
+    synopsis: "",
+    id: "",
+    image: null,
+  });
+  const inputFile = useRef(dataFormMovie.image);
+  // const [isShow, setShow] = useState(false);
+  const changeFileImage = (event) => {
+    setDisplayImage(URL.createObjectURL(event.target.files[0]));
+    setFormMovie({ ...dataFormMovie, image: event.target.files[0] });
+  };
 
-class ManageMovie extends Component {
-  constructor() {
-    super();
-    this.state = {
-      data: [],
-      page: 2,
-      limit: 10,
-      pageInfo: {},
-      form: {
+  const handleChangeInput = (e) => {
+    setFormMovie({ ...dataFormMovie, [e.target.name]: e.target.value });
+  };
+
+  const handleUpdateMovie = (event) => {
+    event.preventDefault();
+    const formData = new FormData();
+    for (const movies in dataFormMovie) {
+      formData.append(movies, dataFormMovie[movies]);
+    }
+    props.updateMovie(formData, dataFormMovie.id).then(() => {
+      setFormMovie({
         name: "",
         category: "",
-        releaseDate: "",
-        cast: "",
         director: "",
+        cast: "",
+        releaseDate: "",
         duration: "",
         synopsis: "",
-        image: null,
-      },
+      });
+      toast.success("Berhasil mengubah movie");
+      props.getAllMovie(1, 20, "ASC");
+      window.location.reload();
+      props.movie.isUpdate = false;
+    });
+  };
+
+  const handleManageMovie = (event) => {
+    event.preventDefault();
+    const {
+      name,
+      category,
+      cast,
+      director,
+      duration,
+      image,
+      releaseDate,
+      synopsis,
+    } = dataFormMovie;
+    const setDataMovie = {
+      name,
+      category,
+      cast,
+      director,
+      duration,
+      image,
+      releaseDate,
+      synopsis,
     };
-  }
-
-  componentDidMount() {
-    this.getDataMovie();
-  }
-
-  changeText = (event) => {
-    this.setState({
-      form: {
-        ...this.state.form,
-        [event.target.name]: event.target.value,
-      },
-    });
-  };
-
-  changeFile = (event) => {
-    this.setState({
-      form: {
-        ...this.state.form,
-        [event.target.name]: event.target.files[0],
-      },
-    });
-  };
-
-  handleSubmit = (e) => {
-    e.preventDefault();
-    // console.log(this.state.form);
-    const formData = new FormData();
-    // formData.append("name", this.state.form.name);
-    for (const data in this.state.form) {
-      formData.append(data, this.state.form[data]);
+    const formImage = new FormData();
+    for (const movies in setDataMovie) {
+      formImage.append(movies, setDataMovie[movies]);
     }
-    console.log(formData);
-    console.log(formData.entries());
-    // UNTUK MENGECEK DATA DI DALAM FORMDATA
-    for (const data of formData.entries()) {
-      // [
-      //   [property, value],
-      //   [],
-      // ]
-      console.log(data[0] + ", " + data[1]);
-    }
-    axios
-      .post("http://localhost:3001/movie", formData)
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+    for (const data in setDataMovie) {
+      if (setDataMovie[data] === "") {
+        toast.error("Lengkapi Form yang kosong!");
 
-  setUpdate = () => {
-    console.log("setupdate");
-  };
-
-  handleUpdate = (id) => {
-    console.log("handleupdate");
-    this.props.history.push(`/managemovie/${id}`);
-  };
-
-  handleDelete = () => {
-    console.log("handledelete");
-  };
-
-  getDataMovie = () => {
-    axios
-      .get(`movie?page=${this.state.page}&limit=${this.state.limit}`)
-      .then((res) => {
-        // console.log(res.data);
-        this.setState({
-          data: res.data.data,
-          pageInfo: res.data.pagination,
-        });
-      })
-      .catch((err) => {
-        console.log(err.response);
-      });
-  };
-
-  handlePagination = (event) => {
-    // console.log(event.selected + 1);
-    const selectedPage = event.selected + 1;
-    this.setState(
-      {
-        page: selectedPage,
-      },
-      () => {
-        this.getDataMovie();
+        return false;
       }
-    );
+    }
+
+    props.createMovie(formImage).then(() => {
+      toast.success("Berhasil menambahkan movie!");
+      setFormMovie({
+        name: "",
+        category: "",
+        director: "",
+        cast: "",
+        releaseDate: "",
+        duration: "",
+        synopsis: "",
+      });
+      props.getAllMovie(1, 20, "ASC");
+    });
+  };
+  const handleReset = () => {
+    setFormMovie({
+      name: "",
+      category: "",
+      director: "",
+      cast: "",
+      releaseDate: "",
+      duration: "",
+      synopsis: "",
+    });
+    props.movie.isUpdate = false;
   };
 
-  handleDetail = (data) => {
-    // [1] = bisa digunakan biasanya untuk url params
-    // this.props.history.push(`/basic-detail?movieId=${data}`);
-    // [2] = bisa digunakan jika data tidak mau ditampilkan di url
-    // this.props.history.push("/basic-detail", { movieId: data });
-    // [3] =bisa digunakan untuk detail product/data
-    this.props.history.push(`/basic-detail/${data}`);
-    // console.log(data);
+  const handleChangeFile = () => {
+    inputFile.current.click();
   };
 
-  render() {
-    const { data, pageInfo } = this.state;
-    return (
-      <div>
-        <Header />
-        <Container>
-          <Row style={{ marginTop: "40px" }}>
-            <Col sm={3}>
-              <div className="border__manage">
-                <img src={spiderman} alt="" />
-              </div>
-            </Col>
-            <Col sm={4}>
-              <Form onSubmit={this.handleSubmit}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>Movie Name</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Input Name ..."
-                    name="name"
-                    onChange={(event) => this.changeText(event)}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>Director</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Input Director ..."
-                    name="director"
-                    onChange={(event) => this.changeText(event)}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>Released Date</Form.Label>
-                  <Form.Control
-                    type="date"
-                    name="releaseDate"
-                    onChange={(event) => this.changeText(event)}
-                  />
-                </Form.Group>
-              </Form>
-            </Col>
-            <Col sm={4}>
-              <Form onSubmit={this.handleSubmit}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>Category</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Input Category ..."
-                    name="category"
-                    onChange={(event) => this.changeText(event)}
-                  />
-                </Form.Group>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>Casts</Form.Label>
-                  <Form.Control
-                    type="text"
-                    placeholder="Input Cast ..."
-                    name="cast"
-                    onChange={(event) => this.changeText(event)}
-                  />
-                </Form.Group>
-                <Row>
-                  <Col>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                      <Form.Label>Duration</Form.Label>
-                      <Form.Control
-                        type="text"
-                        placeholder="Input Duration ..."
-                        name="duration"
-                        onChange={(event) => this.changeText(event)}
-                      />
-                    </Form.Group>
-                  </Col>
-                </Row>
-              </Form>
-            </Col>
-          </Row>
-          <Row>
-            <Form onSubmit={this.handleSubmit}>
-              <input
-                type="file"
-                name="image"
-                onChange={(event) => this.changeFile(event)}
-              />
-              <Form.Group
-                className="mb-3 mt-3"
-                controlId="exampleForm.ControlTextarea1"
-              >
-                <Form.Label>Synopsis</Form.Label>
-                <Form.Control
-                  as="textarea"
-                  rows={3}
-                  type="text"
-                  placeholder="Input Synopsis ..."
-                  name="synopsis"
-                  onChange={(event) => this.changeText(event)}
-                />
-              </Form.Group>
+  useEffect(() => {
+    setFormMovie({ ...props.movie.data });
+  }, [props.movie.data]);
 
-              <Col style={{ textAlign: "right" }}>
-                <Button
-                  variant="primary"
-                  type="submit"
-                  style={{ marginRight: "20px" }}
+  return (
+    <div>
+      <Header />
+      <Container>
+        <section className="manage__movie-form">
+          <div className="d-flex justify-content-between">
+            <h5 className="manage__movie-form-title">Form Movie</h5>
+            <ToastContainer />
+          </div>
+          <div className="manage__movie-form-card">
+            <form
+              onSubmit={
+                props.movie.isUpdate ? handleUpdateMovie : handleManageMovie
+              }
+            >
+              <div className="manage__movie-form-card-body">
+                <div
+                  className="manage__movie-form-card-image-parent"
+                  onClick={handleChangeFile}
                 >
-                  Submit
-                </Button>
-                <Button variant="primary" type="submit">
-                  Reset
-                </Button>{" "}
-              </Col>
-            </Form>
-          </Row>
-          <Row>
-            {data.map((item) => (
-              <div className="col-md-4" key={item.id}>
-                <Card data={item} handleDetail={this.handleDetail} />
+                  <img
+                    src="https://www.a1hosting.net/wp-content/themes/arkahost/assets/images/default.jpg"
+                    className="img-fluid"
+                    alt="Movie"
+                  />
+                  <input
+                    type="file"
+                    name="image"
+                    ref={inputFile}
+                    onChange={changeFileImage}
+                  />
+                </div>
+                <div className="row manage__movie-form-card-container">
+                  <div className="col-md-6">
+                    <label>Movie Name</label>
+                    <input
+                      type="text"
+                      className="manage__movie-form-card-input"
+                      placeholder="Spider-Man: Homecoming"
+                      name="name"
+                      onChange={handleChangeInput}
+                      id="name"
+                      value={dataFormMovie.name}
+                    />
+                  </div>
+                  <div className="col-md-6">
+                    <label htmlFor="category">Category</label>
+                    <input
+                      type="text"
+                      className="manage__movie-form-card-input"
+                      placeholder="Action, Adventure, Sci-Fi"
+                      name="category"
+                      onChange={handleChangeInput}
+                      id="category"
+                      value={dataFormMovie.category}
+                    />
+                  </div>
+                  <div className="col-md-6">
+                    <label htmlFor="director">Director</label>
+                    <input
+                      type="text"
+                      className="manage__movie-form-card-input"
+                      placeholder="Jon Watts"
+                      name="director"
+                      onChange={handleChangeInput}
+                      id="director"
+                      value={dataFormMovie.director}
+                    />
+                  </div>
+                  <div className="col-md-6">
+                    <label htmlFor="casts">Casts</label>
+                    <input
+                      type="text"
+                      className="manage__movie-form-card-input"
+                      placeholder="Tom Holland, Michael Keaton, Robert Dow.."
+                      name="cast"
+                      onChange={handleChangeInput}
+                      id="cast"
+                      value={dataFormMovie.cast}
+                    />
+                  </div>
+                  <div className="col-md-6">
+                    <label htmlFor="releaseDate">Release Date</label>
+                    <input
+                      type="date"
+                      className="manage__movie-form-card-input"
+                      name="releaseDate"
+                      id="releaseDate"
+                      onChange={handleChangeInput}
+                      value={dataFormMovie.releaseDate}
+                    />
+                  </div>
+                  <div className="col-md-3">
+                    <label htmlFor="durationHour">Duration Hour</label>
+                    <input
+                      type="text"
+                      className="manage__movie-form-card-input"
+                      placeholder="2"
+                      name="duration"
+                      onChange={handleChangeInput}
+                      id="duration"
+                      value={dataFormMovie.duration}
+                    />
+                  </div>
+                </div>
               </div>
-            ))}
-          </Row>
-          <Pagination
-            previousLabel={"Previous"}
-            nextLabel={"Next"}
-            breakLabel={"..."}
-            pageCount={pageInfo.totalPage}
-            onPageChange={this.handlePagination}
-            containerClassName={"pagination"}
-            disabledClassName={"pagination__disabled"}
-            activeClassName={"pagination__active"}
-          />
-        </Container>
-        <Footer />
-      </div>
-    );
-  }
+              <h6 style={{ margin: "20px 0px 10px 0px" }}>Synopsis</h6>
+              <div>
+                <input
+                  type="text"
+                  className="manage__movie-form-card-synopsis"
+                  placeholder="lorem ipsum...."
+                  name="synopsis"
+                  onChange={handleChangeInput}
+                  id="synopsis"
+                  value={dataFormMovie.synopsis}
+                />
+              </div>
+              <div className="manage__movie-form-card-container-button">
+                <button
+                  className="manage__movie-card-button"
+                  onClick={handleReset}
+                >
+                  Reset
+                </button>
+                <button
+                  type="submit"
+                  className="manage__movie-card-button-active"
+                >
+                  {props.movie.isUpdate ? "Update" : "Submit"}
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+        <DataListMovie />
+      </Container>
+      <Footer />
+    </div>
+  );
 }
 
 const mapStateToProps = (state) => ({
   movie: state.movie,
 });
 
-const mapDispatchToProps = { movie };
-
+const mapDispatchToProps = {
+  updateMovie,
+  getAllMovie,
+  createMovie,
+};
 export default connect(mapStateToProps, mapDispatchToProps)(ManageMovie);

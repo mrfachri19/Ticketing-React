@@ -1,56 +1,93 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  ProgressBar,
-  Nav,
-  Form,
-  Button,
-} from "react-bootstrap";
+import { Container, Row, Col, Card, Nav, Form, Button } from "react-bootstrap";
 import Header from "../../Header";
 import Footer from "../../Footer";
-import { getdatauser } from "../../../store/actions/getdatauser";
+import { GetUser } from "../../../store/actions/user";
 import { connect } from "react-redux";
-import image from "../../../assets/image/Ellipse 11.png";
-// import axios from "../../../utils/axios";
+import axios from "../../../utils/axios";
+import Profiluser from "../../../components/ProfileInfo";
 import "./index.css";
 
 class Profile extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
-      getdatauser: [],
-      form: {
-        firstName: "",
-        lastName: "",
-        email: "",
-        noTlp: "",
-        image: null,
+      user_id: localStorage.getItem("user_id"),
+      form_profile: {
+        firstName: props.user.users.firstName,
+        lastName: props.user.users.lastName,
+        email: props.user.users.email,
+        noTelp: props.user.users.phoneNumber,
       },
+      menu: false,
+      isError: true,
+      isActive: true,
+      message: "",
     };
   }
+  componentDidMount = () => {
+    this.getUserInformation();
+  };
 
-  getdatauser = () => {
+  getUserInformation = () => {
+    this.props.GetUser();
+  };
+  handleMenuProfile = (e) => {
+    if (e.target.textContent === "Account Settings") {
+      this.setState({
+        menu: false,
+        isActive: true,
+      });
+    } else {
+      this.setState({
+        menu: true,
+        isActive: false,
+      });
+    }
+  };
+  handleUpdateProfile = (event) => {
+    event.preventDefault();
+    const { firstName, lastName, email, noTelp } = this.state.form_profile;
+    const setDataProfile = { firstName, lastName, email, noTelp };
+    if (firstName === "" || lastName === "" || email === "" || noTelp === "") {
+      this.setState({
+        isError: true,
+        message: "Please complete form profile!",
+      });
+    } else {
+      axios
+        .patch("user/update-profile", setDataProfile)
+        .then(() => {
+          this.props.GetUser();
+          this.setState({
+            form_profile: {
+              firstName: "",
+              lastName: "",
+              email: "",
+              phoneNumber: "",
+            },
+            isError: false,
+          });
+        }) // getUser()
+        .catch((error) => {
+          this.setState({
+            isError: true,
+            message: error.response.data.message,
+          });
+        });
+    }
+  };
+  handleInputProfile = (e) => {
     this.setState({
-      getdatauser: this.state.getdatauser,
+      form_profile: {
+        ...this.state.form_profile,
+        [e.target.name]: e.target.value,
+      },
     });
   };
 
-  componentDidMount() {
-    console.log("Didmount is running");
-    console.log(this.props.user);
-  }
-
-  componentDidUpdate() {
-    console.log("Didupdate is running");
-  }
-
   render() {
-    const { getdatauser } = this.props.getdatauser;
-    console.log(this.props.getdatauser);
-
+    const { user } = this.props;
     return (
       <div className="body__payment">
         <Header />
@@ -58,66 +95,7 @@ class Profile extends Component {
           <Row>
             <Col sm={4}>
               <Card style={{ width: "18rem" }}>
-                <h5
-                  style={{
-                    marginLeft: "30px",
-                    marginTop: "40px",
-                    color: "#4E4B66",
-                    fontSize: "16px",
-                  }}
-                >
-                  INFO
-                </h5>
-                <img
-                  src={image}
-                  rounded
-                  style={{ width: "8rem", marginLeft: "80px" }}
-                  alt=""
-                />
-                <Card.Body>
-                  <Card.Title style={{ textAlign: "center" }}>
-                    {this.props.getdatauser.firstName}
-                  </Card.Title>
-                  <Card.Subtitle
-                    className="mb-2 text-muted"
-                    style={{ textAlign: "center" }}
-                  >
-                    Moviegoers
-                  </Card.Subtitle>
-                  <hr className="my-4" />
-                  <Card.Subtitle className="mb-2 text-muted">
-                    Loyalty Points
-                  </Card.Subtitle>
-                  <Card.Subtitle className="mb-2 text-muted">
-                    <div className="card__points">
-                      <h5
-                        style={{
-                          fontSize: "16px",
-                          color: "white",
-                          marginLeft: "20px",
-                          marginTop: "20px",
-                        }}
-                      >
-                        Moviegores
-                      </h5>
-                      <p
-                        style={{
-                          fontSize: "20px",
-                          color: "white",
-                          marginLeft: "20px",
-                          marginTop: "20px",
-                        }}
-                      >
-                        320 points
-                      </p>
-                    </div>
-                    <p style={{ marginTop: "20px" }}>
-                      {" "}
-                      180 points become to Master
-                    </p>
-                    <ProgressBar variant="primary" now={60} />
-                  </Card.Subtitle>
-                </Card.Body>
+                <Profiluser />
               </Card>
             </Col>
             <Col sm={8}>
@@ -137,25 +115,46 @@ class Profile extends Component {
                       Detail information <hr className="my-4" />
                     </h5>
                   </Row>
-                  <Form>
+                  <Form onSubmit={this.handleUpdateProfile}>
                     <Row className="mb-3">
                       <Form.Group as={Col} controlId="formGridEmail">
                         <Form.Label>First Name</Form.Label>
-                        <Form.Control type="name" placeholder="Enter email" />
+                        <Form.Control
+                          type="text"
+                          name="firstName"
+                          id="firstName"
+                          onChange={this.handleInputProfile}
+                          placeholder="Write your new first name..."
+                        />
                       </Form.Group>
                       <Form.Group as={Col} controlId="formGridPassword">
                         <Form.Label>Last Name</Form.Label>
-                        <Form.Control type="name" placeholder="Password" />
+                        <Form.Control
+                          type="text"
+                          onChange={this.handleInputProfile}
+                          placeholder="Write your new last name..."
+                          name="lastName"
+                        />
                       </Form.Group>
                     </Row>
                     <Row className="mb-3">
                       <Form.Group as={Col} controlId="formGridEmail">
                         <Form.Label>Email</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" />
+                        <Form.Control
+                          type="email"
+                          onChange={this.handleInputProfile}
+                          placeholder="Write your new email..."
+                          name="email"
+                        />
                       </Form.Group>
                       <Form.Group as={Col} controlId="formGridPassword">
                         <Form.Label>Phone Number</Form.Label>
-                        <Form.Control type="text" placeholder="Phone Number" />
+                        <Form.Control
+                          type="text"
+                          placeholder="Write your new phone number..."
+                          onChange={this.handleInputProfile}
+                          name="noTelp"
+                        />
                       </Form.Group>
                     </Row>
                     <div className="button__profile">
@@ -201,9 +200,9 @@ class Profile extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  getdatauser: state.getdatauser,
+  user: state.user,
 });
 
-const mapDispatchToProps = { getdatauser };
+const mapDispatchToProps = { GetUser };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Profile);

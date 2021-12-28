@@ -1,23 +1,22 @@
 const initialState = {
-  movies: [],
+  premiere: [],
   pageInfo: {},
   isError: false,
   isLoading: false,
-  isShow: false,
   isUpdate: false,
   message: "",
 };
 
-export default function movie(state = initialState, action) {
+export default function getAllPremiere(state = initialState, action) {
   switch (action.type) {
-    case "SETDATAUPDATE": {
+    case "SETUPDATE": {
       return {
         ...state,
         data: action.data,
-        isUpdate: true,
+        id: action.id,
       };
     }
-    case "POSTMOVIE_PENDING": {
+    case "GETALLPREMIERE_PENDING": {
       return {
         ...state,
         isError: false,
@@ -25,50 +24,25 @@ export default function movie(state = initialState, action) {
         message: "",
       };
     }
-    case "POSTMOVIE_FULFILLED": {
+    case "GETALLPREMIERE_FULFILLED": {
       return {
         ...state,
         isError: false,
         isLoading: false,
-        message: action.payload.data.message,
-      };
-    }
-    case "POSTMOVIE_REJECTED": {
-      return {
-        ...state,
-        isError: true,
-        isLoading: true,
-        message: action.payload.data.message,
-      };
-    }
-    case "GETALLMOVIE_PENDING": {
-      return {
-        ...state,
-        isError: false,
-        isLoading: false,
-        message: "",
-        pageInfo: {},
-      };
-    }
-    case "GETALLMOVIE_FULFILLED": {
-      return {
-        ...state,
-        isError: false,
-        isLoading: false,
-        movies: action.payload.data.data,
+        premiere: action.payload.data.data,
         message: action.payload.data.message,
         pageInfo: action.payload.data.pagination,
       };
     }
-    case "GETALLMOVIE_REJECTED": {
+    case "GETALLPREMIERE_REJECTED": {
       return {
         ...state,
         isError: true,
         isLoading: true,
-        message: action.payload.data.message,
+        message: "",
       };
     }
-    case "UPDATEMOVIE_PENDING": {
+    case "POSTPREMIERE_PENDING": {
       return {
         ...state,
         isError: false,
@@ -76,7 +50,7 @@ export default function movie(state = initialState, action) {
         message: "",
       };
     }
-    case "UPDATEMOVIE_FULFILLED": {
+    case "POSTPREMIERE_FULFILLED": {
       return {
         ...state,
         isError: false,
@@ -84,7 +58,7 @@ export default function movie(state = initialState, action) {
         message: action.payload.data.message,
       };
     }
-    case "UPDATEMOVIE_REJECTED": {
+    case "POSTPREMIERE_REJECTED": {
       return {
         ...state,
         isError: true,
@@ -92,7 +66,7 @@ export default function movie(state = initialState, action) {
         message: action.payload.data.message,
       };
     }
-    case "DELETEMOVIE_PENDING": {
+    case "UPDATEPREMIERE_PENDING": {
       return {
         ...state,
         isError: false,
@@ -100,7 +74,7 @@ export default function movie(state = initialState, action) {
         message: "",
       };
     }
-    case "DELETEMOVIE_FULFILLED": {
+    case "UPDATEPREMIERE_FULFILLED": {
       return {
         ...state,
         isError: false,
@@ -108,7 +82,7 @@ export default function movie(state = initialState, action) {
         message: action.payload.data.message,
       };
     }
-    case "DELETEMOVIE_REJECTED": {
+    case "UPDATEPREMIERE_REJECTED": {
       return {
         ...state,
         isError: true,
@@ -116,56 +90,38 @@ export default function movie(state = initialState, action) {
         message: action.payload.data.message,
       };
     }
-    case "SEARCHMOVIE_PENDING": {
+    case "DELETEPREMIERE_PENDING": {
       return {
         ...state,
-        isLoading: false,
         isError: false,
+        isLoading: false,
         message: "",
       };
     }
-    case "SEARCHMOVIE_FULFILLED": {
+    case "DELETEPREMIERE_FULFILLED": {
       return {
         ...state,
-        isLoading: false,
         isError: false,
-        movies: action.payload.data.data,
+        isLoading: false,
         message: action.payload.data.message,
       };
     }
-    case "SEARCHMOVIE_REJECTED": {
+    case "DELETEPREMIERE_REJECTED": {
       return {
         ...state,
-        isLoading: false,
-        isError: false,
-        message: action.payload.data.message,
-      };
-    }
-    case "SORTMOVIE_PENDING": {
-      return {
-        ...state,
-        isLoading: false,
-        isError: false,
-        message: "",
-      };
-    }
-    case "SORTMOVIE_FULFILLED": {
-      return {
-        ...state,
-        isLoading: false,
-        isError: false,
-        movies: action.payload.data.data,
-        message: action.payload.data.message,
-      };
-    }
-    case "SORTMOVIE_REJECTED": {
-      return {
-        ...state,
-        isLoading: true,
         isError: true,
+        isLoading: false,
         message: action.payload.data.message,
       };
     }
+    case "SEARCHPREMIERE": {
+      return {
+        ...state,
+        data: action.payload.data.data,
+        message: action.payload.data.message,
+      };
+    }
+
     default: {
       return state;
     }

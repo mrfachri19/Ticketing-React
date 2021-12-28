@@ -1,7 +1,11 @@
 import axios from "axios";
 
 const axiosApiIntances = axios.create({
-  baseURL: "http://localhost:3001/",
+  baseURL: `${
+    process.env.REACT_APP_NAME === "dev"
+      ? process.env.REACT_APP_DEV
+      : process.env.REACT_APP_PROD
+  }`,
 });
 
 // Add a request interceptor
@@ -31,7 +35,7 @@ axiosApiIntances.interceptors.response.use(
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     if (error.response.status === 403) {
-      // alert(error.response.data.message);
+      alert(error.response.data.message);
       // jika token nya tidak sesuai sama localstorage / statenya
       if (error.response.data.message === "jwt expired") {
       }

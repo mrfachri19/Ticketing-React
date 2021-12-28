@@ -137,13 +137,151 @@ h4::after {
 .form__control {
   margin-right: auto !important;
 }
+.movies__list--card {
+  padding: 24px;
+  border: 1px solid #dedede;
+  border-radius: 24px;
+  height: 310px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  white-space: normal;
+}
+.movies__list--card:hover {
+  height: 500px;
+}
+
+.movies__list--card-hover {
+  background-color: #ffffff;
+  display: none;
+}
+.movies__list--card:hover .movies__list--card-hover {
+  display: block;
+}
+
+.movies__list--card-hover h2 {
+  margin: 20px 0px;
+  font-weight: 700;
+  font-size: 18px;
+}
+.movies__list--card-hover p {
+  color: #a0a3bd;
+  font-size: 12px;
+}
+.movies__list--card-hover-btn-details {
+  margin: 8px;
+  border: none;
+  width: 100%;
+  cursor: pointer;
+  padding: 3px 0px;
+  color: #5f2eea;
+  border: 1px solid #5f2eea;
+  background-color: transparent;
+  border-radius: 4px;
+}
+.movies__list--card-hover-btn {
+  margin: 8px;
+  border: none;
+  width: 100%;
+  background: #5f2eea;
+  border-radius: 4px;
+  padding: 4px 0px;
+  color: #ffffff;
+}
+.movies__list-image {
+  width: 220px;
+}
+.movies__list--line {
+  padding: 2px;
+  width: 65%;
+  opacity: 1;
+  background-color: #5f2eea;
+}
+
+.allmovie__nowshowing {
+  margin: 0px 42px;
+  color: #5f2eea;
+  font-weight: bold;
+}
+.upcomming__movies {
+  margin: 180px 0;
+}
+.upcomming__movies--button-active {
+  padding: 8px 0px;
+  width: 100%;
+  font-size: 14px;
+  text-align: center;
+  border: none;
+  color: #ffffff;
+  background: #5f2eea;
+  box-shadow: 0px 8px 30px rgba(95, 46, 234, 0.3);
+  border-radius: 4px;
+}
+.upcomming__movies--button-active:hover {
+  color: #ffffff;
+}
+.upcomming__movies--button {
+  padding: 8px 0px;
+  width: 100%;
+  font-size: 14px;
+  text-align: center;
+  border: none;
+  background-color: transparent;
+  color: #5f2eea;
+  border: 1px solid #5f2eea;
+  border-radius: 4px;
+}
+.upcomming__movies-list {
+  background-color: #ffffff;
+  border: 1px solid #dedede;
+  border-radius: 24px;
+  padding: 24px;
+  width: 17%;
+}
+.upcomming__movies--image {
+  width: 244px;
+}
+span {
+  display: block;
+}
+.upcomming__movies--button-details {
+  margin: 20px 0px;
+  border: 1px solid #5f2eea;
+  background-color: transparent;
+  color: #5f2eea;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.upcomming__movies--button-parent {
+  overflow-x: hidden;
+}
+.upcomming__movies-button-child {
+  margin: 0px 2px;
+}
+.upcomming__movies-list-main {
+  overflow-x: hidden;
+}
+.upcomming__movies-list {
+  margin: 0px 19px;
+}
+.movies__list--card-main {
+  overflow-x: hidden;
+}
+
+.movies__list--card-main {
+  overflow-x: auto;
+}
+.upcomming__movies-list-main {
+  overflow-x: auto;
+}
+.upcomming__movies--button-parent {
+  overflow-x: auto;
+}
 
 /* dekstop */
 @media (min-width: 992px) {
-  /* .container {
-    margin: 50px !important;
-    margin-top: 0 !important;
-  } */
   .newest__movie {
     margin-top: 200px !important;
   }
@@ -240,6 +378,7 @@ h4::after {
     white-space: nowrap;
     display: flex;
     flex-direction: row;
+    margin-bottom: 30px;
   }
 
   .month__button .btn {
@@ -287,5 +426,147 @@ h4::after {
 
   .form__control {
     margin-right: auto !important;
+  }
+  .movies__list--card {
+    padding: 24px;
+    border: 1px solid #dedede;
+    border-radius: 24px;
+    height: 310px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    white-space: normal;
+  }
+  .movies__list--card:hover {
+    height: 500px;
+  }
+
+  .movies__list--card-hover {
+    background-color: #ffffff;
+    display: none;
+  }
+  .movies__list--card:hover .movies__list--card-hover {
+    display: block;
+  }
+
+  .movies__list--card-hover h2 {
+    margin: 20px 0px;
+    font-weight: 700;
+    font-size: 18px;
+  }
+  .movies__list--card-hover p {
+    color: #a0a3bd;
+    font-size: 12px;
+  }
+  .movies__list--card-hover-btn-details {
+    margin: 8px;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    padding: 3px 0px;
+    color: #5f2eea;
+    border: 1px solid #5f2eea;
+    background-color: transparent;
+    border-radius: 4px;
+  }
+  .movies__list--card-hover-btn {
+    margin: 8px;
+    border: none;
+    width: 100%;
+    background: #5f2eea;
+    border-radius: 4px;
+    padding: 4px 0px;
+    color: #ffffff;
+  }
+  .movies__list-image {
+    width: 220px;
+  }
+  .movies__list--line {
+    padding: 2px;
+    width: 65%;
+    opacity: 1;
+    background-color: #5f2eea;
+  }
+
+  .allmovie__nowshowing {
+    margin: 0px 42px;
+    color: #5f2eea;
+    font-weight: bold;
+  }
+  .upcomming__movies {
+    margin: 180px 0;
+  }
+  .upcomming__movies--button-active {
+    padding: 8px 0px;
+    width: 100%;
+    font-size: 14px;
+    text-align: center;
+    border: none;
+    color: #ffffff;
+    background: #5f2eea;
+    box-shadow: 0px 8px 30px rgba(95, 46, 234, 0.3);
+    border-radius: 4px;
+  }
+  .upcomming__movies--button-active:hover {
+    color: #ffffff;
+  }
+  .upcomming__movies--button {
+    padding: 8px 0px;
+    width: 100%;
+    font-size: 14px;
+    text-align: center;
+    border: none;
+    background-color: transparent;
+    color: #5f2eea;
+    border: 1px solid #5f2eea;
+    border-radius: 4px;
+  }
+  .upcomming__movies-list {
+    background-color: #ffffff;
+    border: 1px solid #dedede;
+    border-radius: 24px;
+    padding: 24px;
+    width: 17%;
+  }
+  .upcomming__movies--image {
+    width: 244px;
+  }
+  span {
+    display: block;
+  }
+  .upcomming__movies--button-details {
+    margin: 20px 0px;
+    border: 1px solid #5f2eea;
+    background-color: transparent;
+    color: #5f2eea;
+    width: 100%;
+    border-radius: 4px;
+  }
+
+  .upcomming__movies--button-parent {
+    overflow-x: hidden;
+  }
+  .upcomming__movies-button-child {
+    margin: 0px 2px;
+  }
+  .upcomming__movies-list-main {
+    overflow-x: hidden;
+  }
+  .upcomming__movies-list {
+    margin: 0px 19px;
+  }
+  .movies__list--card-main {
+    overflow-x: hidden;
+  }
+
+  .movies__list--card-main {
+    overflow-x: auto;
+  }
+  .upcomming__movies-list-main {
+    overflow-x: auto;
+  }
+  .upcomming__movies--button-parent {
+    overflow-x: auto;
   }
 }

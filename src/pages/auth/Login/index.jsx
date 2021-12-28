@@ -7,10 +7,10 @@ import facebook from "../../..//assets/image/Vector fac.png";
 import google from "../../..//assets/image/flat-color-icons_google.png";
 import axios from "../../../utils/axios";
 import { Button, Form, Jumbotron, Col, Row, Toast } from "react-bootstrap";
-import { getdatauser } from "../../../store/actions/getdatauser";
+import { GetUser } from "../../../store/actions/user";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { login } from "../../../store/actions/auth";
+import { withRouter } from "react-router-dom";
 
 class Login extends Component {
   constructor() {
@@ -43,7 +43,7 @@ class Login extends Component {
         this.props.GetUser().then((response) => {
           localStorage.setItem("role", response.value.data.data[0].role);
           if (response.value.data.data[0].role === "admin") {
-            this.props.history.push("/admin/dashboard");
+            this.props.history.push("/dashboard");
           } else {
             this.props.history.push("/");
           }
@@ -76,6 +76,7 @@ class Login extends Component {
   };
 
   render() {
+    console.log(this.state.msg);
     return (
       <Row>
         <Col sm={7}>
@@ -147,6 +148,11 @@ class Login extends Component {
               Forgot Your Password? <Link to="www.google.com">Reset Now</Link>{" "}
             </p>
           </div>
+          <div className="row text-center .form__login-register">
+            <p>
+              Don't have any account? <Link to="/register">Register</Link>{" "}
+            </p>
+          </div>
           <div className="row button__login">
             <div className="col-sm-6 form__login-btnlink text-center">
               <Button variant="light">
@@ -176,9 +182,11 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  auth: state.auth,
+  user: state.user,
 });
 
-const mapDispatchToProps = { login, getdatauser };
+const mapDispatchToProps = {
+  GetUser,
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Login));

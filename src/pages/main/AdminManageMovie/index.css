@@ -1,0 +1,200 @@
+.manage__movie {
+  background-color: #f5f6f8;
+  padding: 42px 92px;
+}
+.manage__movie-form-title {
+  color: #000000;
+  font-weight: bold;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+.manage__movie-form-card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 42px;
+}
+.manage__movie-form-card-body {
+  display: flex;
+}
+.manage__movie-form-card-image-parent {
+  background: #ffffff;
+  border: 0.5px solid #dedede;
+  border-radius: 6px;
+  width: 35%;
+  padding: 24px;
+}
+.manage__movie-form-card-input {
+  width: 100%;
+  border: 1px solid #dedede;
+  border-radius: 4px;
+  padding: 14px 12px;
+}
+.manage__movie-form-card-container {
+  margin: 0px 20px !important;
+}
+label {
+  color: #4e4b66;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+.manage__movie-form-card-synopsis {
+  padding: 42px;
+  width: 100%;
+  background-color: #fcfdfe;
+  border: 1px solid #dedede;
+  color: #4e4b66;
+  border-radius: 4px;
+  letter-spacing: 0.75px;
+}
+.manage__movie-form-card-synopsis:active {
+  border: none;
+}
+.manage__movie-form-card-container-button {
+  margin: 30px 0px;
+  display: flex;
+  justify-content: end;
+}
+.manage__movie-card-button {
+  border: none;
+  background-color: #ffffff;
+  color: #5f2eea;
+  border: 2px solid #5f2eea;
+  font-weight: bold;
+  margin: 0px 15px;
+  padding: 6px 0px;
+  width: 12%;
+  font-size: 16px;
+  box-shadow: 0px 8px 24px rgba(95, 46, 234, 0.24);
+  border-radius: 4px;
+}
+.manage__movie-card-button-active {
+  border: none;
+  background-color: #5f2eea;
+  color: #f7f7fc;
+  margin: 0px 15px;
+  font-weight: 600;
+  padding: 6px 0px;
+  width: 12%;
+  font-size: 16px;
+  box-shadow: 0px 8px 24px rgba(95, 46, 234, 0.24);
+  border-radius: 4px;
+}
+.manage__movie-list {
+  margin: 50px 0px;
+}
+.manage__movie-list-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.manage__movie-list-sort {
+  padding: 10px 42px;
+  margin: 0px 8px;
+  background-color: #fcfdfe;
+  text-align: left;
+  color: #4e4b66;
+  font-size: 16px;
+  border: 1px solid #dedede;
+  border-radius: 16px;
+}
+.manage__movie-list-search {
+  background-color: #fcfdfe;
+  border: 1px solid #dedede;
+  border-radius: 16px;
+  padding: 10px 42px;
+  color: #4e4b66;
+  font-size: 16px;
+  font-weight: normal;
+  border-radius: 16px;
+}
+.manage__movie-list-column h5 {
+  color: #000000;
+  font-weight: bold;
+  font-size: 24px;
+}
+.manage__movie-list-card {
+  background-color: #ffffff;
+  border-radius: 6px;
+  margin: 20px 0px;
+  padding: 52px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.manage__movie-list-card-body {
+  flex: 0 0 19%;
+  margin: 10px;
+  background-color: #ffffff;
+  width: 10%;
+  text-align: center;
+  padding: 38px;
+  border: 0.5px solid #dedede;
+  border-radius: 8px;
+}
+.manage__movie-list-card-title-movie {
+  margin-top: 10px;
+  color: #14142b;
+  font-weight: bold;
+  font-size: 18px;
+}
+.manage__movie-list-card-category-movie {
+  margin-top: 5px;
+  color: #a0a3bd;
+  font-size: 12px;
+  margin-bottom: 20px;
+}
+
+.manage__movie-list-card-button-update {
+  width: 100%;
+  margin: 4px 0px;
+  padding: 6px 0px;
+  border: 1px solid #5f2eea;
+  color: #5f2eea;
+  font-size: 14px;
+  border-radius: 4px;
+  background-color: transparent;
+}
+.manage__movie-list-card-button-delete {
+  width: 100%;
+  margin: 4px 0px;
+  padding: 6px 0px;
+  border: none;
+  border: 1px solid #ed2e7e;
+  border-radius: 4px;
+  color: #ed2e7e;
+  background-color: transparent;
+  font-size: 14px;
+}
+.schedule__pagination {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0px;
+}
+.schedule__pagination-button {
+  border: 0.5px solid #dedede;
+  text-decoration: none;
+  color: #ffffff;
+  margin: 0px 12px;
+  padding: 8px 14px;
+  background: #5f2eea;
+  box-shadow: 0px 8px 16px rgba(95, 46, 234, 0.24);
+  border-radius: 8px;
+}
+.schedule__pagination-button-previous {
+  text-decoration: none;
+  color: #000000;
+  margin: 0px 12px;
+  padding: 8px 14px;
+  background: #ffffff;
+  border: 0.5px solid #dedede;
+  border-radius: 8px;
+}
+.schedule__pagination-button:hover {
+  color: #ffffff;
+}
+.schedule__pagination-button-previous:hover {
+  color: #000000;
+}

@@ -6,7 +6,7 @@ import facebook from "../../..//assets/image/Vector fac.png";
 import google from "../../..//assets/image/flat-color-icons_google.png";
 import axios from "../../../utils/axios";
 import { Button, Form, Jumbotron, Col, Row, Toast } from "react-bootstrap";
-import { getdatauser } from "../../../store/actions/getdatauser";
+import { GetUser } from "../../../store/actions/user";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { login } from "../../../store/actions/auth";
@@ -178,6 +178,6 @@ const mapStateToProps = (state) => ({
   auth: state.auth,
 });
 
-const mapDispatchToProps = { login, getdatauser };
+const mapDispatchToProps = { login, GetUser };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

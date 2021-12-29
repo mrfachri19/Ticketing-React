@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
-import elips from "../../assets/image/Ellipse 11.png";
 import { Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -81,7 +80,7 @@ class Header extends Component {
     // console.log(this.state);
     return (
       <Container>
-        <Navbar bg="white" expand="sm" className="nav__brand">
+        <Navbar bg="white" expand="sm" className="nav__brand ">
           <Navbar.Brand className="navbar__tiket">
             <img src={tiket} alt="ticketz 1" />
             <Navbar.Toggle

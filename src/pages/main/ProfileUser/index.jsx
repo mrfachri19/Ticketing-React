@@ -6,6 +6,7 @@ import { GetUser } from "../../../store/actions/user";
 import { connect } from "react-redux";
 import axios from "../../../utils/axios";
 import Profiluser from "../../../components/ProfileInfo";
+import { Link } from "react-router-dom";
 import "./index.css";
 
 class Profile extends Component {
@@ -101,12 +102,12 @@ class Profile extends Component {
             <Col sm={8}>
               <Row>
                 <div className="navbar__profile">
-                  <Nav defaultActiveKey="/home" as="ul">
+                  <Nav>
                     <Nav.Item as="li">
-                      <Nav.Link href="/home">Account Settings</Nav.Link>
+                      <Link to="/profile">Account Settings</Link>
                     </Nav.Item>
                     <Nav.Item as="li">
-                      <Nav.Link eventKey="link-1">Order History</Nav.Link>
+                      <Link to="/orderhistory">Order History</Link>
                     </Nav.Item>
                   </Nav>
                   <hr className="my-4" />

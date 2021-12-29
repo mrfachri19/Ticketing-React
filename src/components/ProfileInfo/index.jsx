@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
@@ -59,7 +60,11 @@ function ProfileInfo(props) {
             }}
           >
             <img
-              src={`http://localhost:3001/uploads/user/${user.image}`}
+              src={`${
+                process.env.REACT_APP_NAME === "dev"
+                  ? `${process.env.REACT_APP_DEV}uploads/user/${user.image}`
+                  : `${process.env.REACT_APP_PROD}uploads/user/${user.image}`
+              }`}
               className="img-fluid w-50 "
               style={{ borderRadius: 100 }}
               alt="Profile"

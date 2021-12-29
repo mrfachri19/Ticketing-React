@@ -38,7 +38,7 @@ export class TicketResult extends Component {
       tickets: [],
       isLoading: false,
     };
-    console.log("Constructor...");
+    console.log(props.location.state);
   }
   componentDidMount() {
     console.log("Component DidMount...");
@@ -86,8 +86,10 @@ export class TicketResult extends Component {
     this.props.history.push("/profile", { userBooking });
   };
   render() {
-    console.log("Render...");
-    console.log(this.state.isLoading ? this.state.tickets.title : "loading...");
+    console.log(this.state.tickets);
+    console.log(
+      this.state.isLoading ? this.state.tickets.movieName : "loading..."
+    );
     // console.log(this.state.isLoading ? this.state.tickets : "loading...");
     return (
       <div className="body__result">
@@ -123,7 +125,7 @@ export class TicketResult extends Component {
                       <div className="ticket__result-body">
                         <div className="ticket__result-body-space mb-4">
                           <h6>Movie</h6>
-                          <span>{this.state.tickets.title}</span>
+                          <span>{this.state.tickets.movieName}</span>
                         </div>
                         <div className="row ticket__result-body-desc">
                           <div className="col-md-3 me-2 ticket__result-body-space mb-3">

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import Header from "../../Header";
 import Footer from "../../Footer";
 import cinema from "../../../assets/image/Vector-1.png";
@@ -11,9 +11,10 @@ import { useTicked } from "../../../store/actions/user";
 import { ToastContainer, toast } from "react-toastify";
 
 export class OrderHistory extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
+      movieName: localStorage.getItem("nameMovie"),
       orders: [],
       showDetails: false,
       isTickedUsed: "",
@@ -57,7 +58,7 @@ export class OrderHistory extends Component {
             this.getOrderHistory();
           }
         );
-        toast.success("Ticket di aktifkan...");
+        toast.success("Ticket Actived");
       })
       .catch((error) => console.log(error));
   };
@@ -68,7 +69,7 @@ export class OrderHistory extends Component {
       <div className="body__payment">
         <Header />
         <Container>
-          <Row>
+          <div className="profile__column-settings-order-history">
             {orders.length > 0 ? (
               orders.map((order) => (
                 <div
@@ -77,12 +78,14 @@ export class OrderHistory extends Component {
                 >
                   <ToastContainer />
                   <div className="profile__column-settings-order-history-desc">
-                    <span className="profile__column-settings-order-history-date">
+                    <span className="order__date">
                       {new Date(order.dateBooking).toDateString()} -{" "}
-                      {order.timeBooking}pm
+                      {order.timeBooking}
                     </span>
                     <div className="profile__column-settings-order-history-details">
-                      <h3>{order.title}</h3>
+                      <h3 style={{ fontSize: "24px" }}>
+                        {this.state.movieName}
+                      </h3>
                       <img
                         src={cinema}
                         width="100"
@@ -120,25 +123,23 @@ export class OrderHistory extends Component {
                     <div className="profile__column-settings-order-history-bottom-show-details">
                       <div className="profile__column-settings-order-history-show-details-title">
                         <p>Seats</p>
-                        <span>{order.seat}</span>
+                        <h6>{order.seat}</h6>
                       </div>
                       <div className="profile__column-settings-order-history-show-details-title">
                         <p>Date Booking</p>
-                        <span>
-                          {new Date(order.dateBooking).toDateString()}
-                        </span>
+                        <h6>{new Date(order.dateBooking).toDateString()}</h6>
                       </div>
                       <div className="profile__column-settings-order-history-show-details-title">
                         <p>Time Booking</p>
-                        <span>{order.timeBooking}</span>
+                        <h6>{order.timeBooking}</h6>
                       </div>
                       <div className="profile__column-settings-order-history-show-details-title">
                         <p>paymentMethod</p>
-                        <span>{order.paymentMethod}</span>
+                        <h6>{order.paymentMethod}</h6>
                       </div>
                       <div className="profile__column-settings-order-history-show-details-title">
                         <p>Total Ticket</p>
-                        <span>{order.totalTicket}</span>
+                        <h6>{order.totalTicket}</h6>
                       </div>
                     </div>
                   ) : null}
@@ -146,10 +147,10 @@ export class OrderHistory extends Component {
               ))
             ) : (
               <p className="text-center fs-2 fw-bold mt-3">
-                History masih kosong, Pesan Film yu <Link to="/">disini!</Link>
+                History is empty, Please Order Movie <Link to="/">disini!</Link>
               </p>
             )}
-          </Row>
+          </div>
         </Container>
         <Footer />
       </div>

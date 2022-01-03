@@ -83,34 +83,34 @@ export class PaymentInfo extends Component {
           <div className="payment__main-info-card">
             <div className="payment__main-info-card-child">
               <p>Date & time</p>
-              <span>
+              <h5 style={{ fontSize: "16px" }}>
                 {new Date(paymentInfo.dateBooking).toDateString()} at{" "}
                 {paymentInfo.timeBooking}
-              </span>
+              </h5>
             </div>
             <hr className="payment__main-info-card-line" />
             <div className="payment__main-info-card-child">
               <p>Movie title</p>
-              <span>{paymentInfo.movieName}</span>
+              <h5 style={{ fontSize: "16px" }}>{paymentInfo.movieName}</h5>
             </div>
             <hr className="payment__main-info-card-line" />
             <div className="payment__main-info-card-child">
               <p>Cinema name</p>
-              <span>CineOne21 Cinema</span>
+              <h5 style={{ fontSize: "16px" }}>Cinema 21</h5>
             </div>
             <hr className="payment__main-info-card-line" />
             <div className="payment__main-info-card-child">
               <p>Number of tickets</p>
-              <span>
+              <h5 style={{ fontSize: "16px" }}>
                 {!paymentInfo.seat ? null : paymentInfo.seat.length} pieces
-              </span>
+              </h5>
             </div>
             <hr className="payment__main-info-card-line" />
             <div className="payment__main-info-card-child">
               <p>Total payment</p>
-              <span>
+              <h5 style={{ fontSize: "16px" }}>
                 Rp.{!paymentInfo.seat ? null : paymentInfo.seat.length * 70000}
-              </span>
+              </h5>
             </div>
           </div>
           <div className="payment__main-method">
@@ -191,13 +191,11 @@ export class PaymentInfo extends Component {
                 <h3 className="payment__main-optional-title">Pay via cash. </h3>
               </div>
             </div>
-            <div className="payment__main-method-main-button">
-              <button className="payment__main-method-button">
-                Prvious step
-              </button>
+            <div className="payment_button">
+              <button className="payment_btn">Prvious step</button>
               <button
                 type="submit"
-                className="payment__main-method-button-active"
+                className="payment_btn-active"
                 onClick={this.handlePostBooking}
               >
                 Pay your order

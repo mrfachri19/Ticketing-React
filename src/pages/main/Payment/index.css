@@ -2,15 +2,6 @@
   background-color: #e5e5e5;
 }
 
-.payment {
-  border: 10px #b3acac;
-  border-radius: 10px;
-  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.12);
-  background-color: white;
-  padding: 20px;
-  text-align: center;
-}
-
 h3 {
   margin-top: 56px;
   margin-bottom: 24px;
@@ -47,7 +38,7 @@ h3 {
 .button__payment Button {
   width: 200px;
 }
-*/ Payment page .payment__main {
+.payment__main {
   padding: 60px 92px;
   background-color: #f5f6f8;
   display: flex;
@@ -78,7 +69,7 @@ h3 {
 }
 .payment__main-info-card-child p {
   color: #6b6b6b;
-  font-size: 20px;
+  font-size: 16px;
 }
 .payment__main-info-card-child span {
   color: #000000;
@@ -167,11 +158,12 @@ h3 {
 .payment__main-optional-title a:hover {
   text-decoration: underline;
 }
-.payment__main-method-main-button {
+.payment_button {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 40px;
 }
-.payment__main-method-button {
+.payment_btn {
   border: 2px solid #5f2eea;
   border-radius: 16px;
   color: #5f2eea;
@@ -179,7 +171,7 @@ h3 {
   width: 40%;
   padding: 12px;
 }
-.payment__main-method-button-active {
+.payment_btn-active {
   background: #5f2eea;
   border: none;
   color: #ffffff;
@@ -188,7 +180,7 @@ h3 {
   width: 40%;
   padding: 12px;
 }
-.payment__main-method-button-active-mobile {
+.payment_btn-active-mobile {
   background: #5f2eea;
   display: none;
   border: none;

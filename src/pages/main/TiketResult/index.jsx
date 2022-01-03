@@ -4,6 +4,8 @@ import { Container, Row } from "react-bootstrap";
 import Header from "../../Header";
 import Footer from "../../Footer";
 import axios from "../../../utils/axios";
+import tickitz from "../../../assets/image/tickitz 1.png";
+import qrcode from "../../../assets/image/QRCode.png";
 
 import "./index.css";
 
@@ -41,7 +43,6 @@ export class TicketResult extends Component {
     console.log(props.location.state);
   }
   componentDidMount() {
-    console.log("Component DidMount...");
     this.getUserBuyTicket();
     if (!this.state.userId || !this.state.movieId || !this.state.scheduleId) {
       this.props.history.push("/");
@@ -86,11 +87,11 @@ export class TicketResult extends Component {
     this.props.history.push("/profile", { userBooking });
   };
   render() {
-    console.log(this.state.tickets);
+    console.log(this.props.location.state);
     console.log(
       this.state.isLoading ? this.state.tickets.movieName : "loading..."
     );
-    // console.log(this.state.isLoading ? this.state.tickets : "loading...");
+
     return (
       <div className="body__result">
         <Header />
@@ -105,27 +106,27 @@ export class TicketResult extends Component {
                       <div className="ticket__result-header">
                         <div className="ticket__result-header-column">
                           <img
-                            // src={Tickitz}
+                            src={tickitz}
                             className="ticket__result-image img-fluid"
                             alt="Tickitz"
                           />
                           <h6>Admit One</h6>
                           <img
-                            // src={Tickitz}
+                            src={tickitz}
                             className="ticket__result-image img-fluid"
                             alt="Tickitz"
                           />
                         </div>
                       </div>
                       <img
-                        // src={QRCode}
+                        src={qrcode}
                         alt="Barcode"
                         className="ticket__result-image-barcode img-fluid d-block d-md-none"
                       />
                       <div className="ticket__result-body">
                         <div className="ticket__result-body-space mb-4">
                           <h6>Movie</h6>
-                          <span>{this.state.tickets.movieName}</span>
+                          <span>{this.props.location.state.movieName}</span>
                         </div>
                         <div className="row ticket__result-body-desc">
                           <div className="col-md-3 me-2 ticket__result-body-space mb-3">
@@ -138,7 +139,7 @@ export class TicketResult extends Component {
                           </div>
                           <div className="col-md-3 me-2 ticket__result-body-space mb-3">
                             <h6>Category</h6>
-                            <span>-</span>
+                            <span>Action, Adventure</span>
                           </div>
                           <div className="col-md-3 me-2 ticket__result-body-space mb-3">
                             <h6>Count </h6>
@@ -150,7 +151,7 @@ export class TicketResult extends Component {
                           </div>
                           <div className="col-md-3 me-2 ticket__result-body-space mb-3">
                             <h6>Price</h6>
-                            <span>${this.state.tickets.totalPayment}</span>
+                            <span>Rp.{this.state.tickets.totalPayment}</span>
                           </div>
                         </div>
                         <div className="ticket__result-body-total d-flex d-md-none">

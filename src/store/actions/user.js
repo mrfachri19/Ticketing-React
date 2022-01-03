@@ -17,7 +17,7 @@ export const getDashboard = (movieId, location, premiere) => {
   return {
     type: "GETDASHBOARD",
     payload: axios.get(
-      `user/dashboard?movieId=${movieId}&location=${location}&premier=${premiere}`
+      `user/dashboard/?movieId=${movieId}&location=${location}&premier=${premiere}`
     ),
   };
 };

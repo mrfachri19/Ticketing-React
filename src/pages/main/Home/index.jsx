@@ -4,7 +4,7 @@ import Footer from "../../Footer/index";
 import axios from "../../../utils/axios";
 import "./index.css";
 import banner from "../../../assets/image/Group 14.png";
-import { Button, Col, Row, Form, Container } from "react-bootstrap";
+import { Button, Col, Row, Container } from "react-bootstrap";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 

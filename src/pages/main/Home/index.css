@@ -128,6 +128,7 @@ h4::after {
 
 #inlineFormInputName {
   width: 230px !important;
+  margin-left: 400px;
 }
 .moviegoers p {
   margin-top: 48px;
@@ -280,7 +281,7 @@ span {
   overflow-x: auto;
 }
 
-/* dekstop */
+/* ===================== dekstop ============================ */
 @media (min-width: 992px) {
   .newest__movie {
     margin-top: 200px !important;
@@ -405,18 +406,6 @@ span {
 
   .moviegoers h2 span {
     color: #5f2eea;
-  }
-
-  .moviegoers__form {
-    margin-left: 30px;
-  }
-
-  .moviegoers__form input {
-    width: 115px;
-  }
-
-  #inlineFormInputName {
-    width: 200px;
   }
 
   .moviegoers p {

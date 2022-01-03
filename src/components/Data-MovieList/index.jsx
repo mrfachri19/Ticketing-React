@@ -25,7 +25,7 @@ function DataListMovie(props) {
   const history = useHistory();
   const [dataMovies, setMovies] = useState(props.movie.movies);
   const [page, setPage] = useState(1);
-  const [limit] = useState(10);
+  const [limit] = useState(4);
   const [pageInfo] = useState(props.movie.pageInfo.totalPage);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("");
@@ -168,8 +168,8 @@ function DataListMovie(props) {
       <section className="manage__movie-pagination">
         <div>
           <Pagination
-            previousLabel={null}
-            nextLabel={null}
+            previousLabel={"<"}
+            nextLabel={">"}
             breakLabel={"..."}
             pageCount={pageInfo}
             onPageChange={handleChangePagination}

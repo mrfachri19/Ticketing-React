@@ -167,6 +167,7 @@ function ManageMovie(props) {
                     name="image"
                     ref={inputFile}
                     onChange={changeFileImage}
+                    style={{ display: "none" }}
                   />
                 </div>
                 <div className="row manage__movie-form-card-container">

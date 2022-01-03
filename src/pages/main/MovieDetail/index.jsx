@@ -5,6 +5,7 @@ import axios from "../../../utils/axios";
 import "./index.css";
 import Footer from "../../Footer/index";
 import Premier1 from "../../../assets/image/Sponsor1.png";
+import SchedulePagination from "../../../components/SchedulePagination";
 
 class Detail extends Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class Detail extends Component {
       showSchedule: false,
       selectedTime: true,
       page: 1,
-      limit: 1,
+      limit: 5,
       pageInfo: [],
     };
   }
@@ -77,7 +78,7 @@ class Detail extends Component {
   getSchedule = () => {
     axios
       .get(
-        `schedule?searchMovieId=${this.state.movieId}&searchLocation=${this.state.searchLocation}&page=${this.state.page}&limit=${this.state.limit}&sort=price ASC`
+        `schedule?searchMovieId=${this.state.movieId}&searchLocation=${this.state.searchLocation}&page=${this.state.page}&limit=${this.state.limit}`
       )
       .then((response) => {
         this.setState({
@@ -226,7 +227,7 @@ class Detail extends Component {
             </div>
           </div>
 
-          <div className="row kartu1">
+          <div className="detail__list_schedule-container">
             <>
               {this.state.showSchedule && this.state.schedules.length > 0 ? (
                 this.state.schedules.map((schedule) => {
@@ -255,7 +256,7 @@ class Detail extends Component {
                           />
                           <div className="detail__list_schedule-card-body-title">
                             <h5>{schedule.premiere}</h5>
-                            <span>Whatever street No.12, South Purwokerto</span>
+                            <span>{schedule.location}</span>
                           </div>
                         </div>
                         <hr className="position-absolute line-detail" />
@@ -297,14 +298,14 @@ class Detail extends Component {
                 <p className="mx-auto fw-bold fs-4">Select Your Location!</p>
               )}
             </>
-            {/* {this.state.pageInfo.totalPage ? (
-              <SchedulePagination
-                data={this.state.schedules}
-                pageInfo={this.state.pageInfo}
-                handleSchedule={this.handleSchedulePagination}
-              />
-            ) : null} */}
           </div>
+          {this.state.pageInfo.totalPage ? (
+            <SchedulePagination
+              data={this.state.schedules}
+              pageInfo={this.state.pageInfo}
+              handleSchedule={this.handleSchedulePagination}
+            />
+          ) : null}
         </Container>
         <Footer />
       </div>

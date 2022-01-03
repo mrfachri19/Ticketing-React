@@ -47,7 +47,6 @@ class Header extends Component {
     axios
       .get(`/movie?search=${this.state.search}`)
       .then((response) => {
-        // const movies = response.data.data.map((value) => value.title);
         this.setState({
           movies: response.data.data,
           isError: false,
@@ -77,10 +76,10 @@ class Header extends Component {
     const { user } = this.props;
     const { image } = user.users;
     // console.log(this.props);
-    // console.log(this.state);
+
     return (
-      <Container>
-        <Navbar bg="white" expand="sm" className="nav__brand ">
+      <Navbar bg="white" expand="sm" className="nav__brand ">
+        <Container>
           <Navbar.Brand className="navbar__tiket">
             <img src={tiket} alt="ticketz 1" />
             <Navbar.Toggle
@@ -211,7 +210,7 @@ class Header extends Component {
                         : "https://inspektorat.kotawaringinbaratkab.go.id/public/uploads/user/default-user-imge.jpeg"
                     }
                     className="img-fluid"
-                    style={{ width: 50, borderRadius: 100 }}
+                    style={{ width: 40, borderRadius: 100 }}
                     alt="Profile"
                     onClick={this.handleProfile}
                   />
@@ -238,8 +237,8 @@ class Header extends Component {
               ) : null}
             </Nav>
           </Navbar.Collapse>
-        </Navbar>
-      </Container>
+        </Container>
+      </Navbar>
     );
   }
 }

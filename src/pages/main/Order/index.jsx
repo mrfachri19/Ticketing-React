@@ -27,7 +27,7 @@ class Order extends Component {
         : "",
       user_id: localStorage.getItem("user_id"),
       movieName: localStorage.getItem("nameMovie"),
-      price: 10,
+      price: 70000,
       isError: false,
       message: "",
     };
@@ -162,7 +162,7 @@ class Order extends Component {
               >
                 <h3>Choose Your Seat</h3>
               </div>
-              <div class="row chooseseat" style={{ marginBottom: "40px" }}>
+              <div class="row" style={{ marginBottom: "40px" }}>
                 <div class="seat">
                   {this.state.seats.map((seat, idx) => (
                     <div key={idx}>
@@ -181,7 +181,7 @@ class Order extends Component {
                 </div>
               </div>
               <div class="row button__movie">
-                <div class="col-sm-6">
+                <div class="col-sm-7">
                   <button
                     class="btn btn-outline-primary my-0 my-sm-0"
                     type="submit"
@@ -189,9 +189,9 @@ class Order extends Component {
                     Change Your Movie
                   </button>
                 </div>
-                <div class="col-sm-6" style={{ marginBottom: "72px" }}>
+                <div class="col-sm-4" style={{ marginBottom: "72px" }}>
                   <button
-                    class="btn btn-outline-primary my-0 my-sm-0"
+                    class="btn btn-outline-primary my-0 my-sm-0 btn_movie"
                     onClick={this.handleCheckout}
                   >
                     Check Out Now
@@ -202,7 +202,7 @@ class Order extends Component {
             <Col sm={4}>
               <h3>Order Info</h3>
               <div className="order">
-                <div className="row text-center">
+                <div className="row text-center img__cinema">
                   <img src={cinema} alt="" />
                   <h3>CineOne21 Cinema</h3>
                 </div>
@@ -220,7 +220,7 @@ class Order extends Component {
                       <h6>{new Date(this.state.dateBooking).toDateString()}</h6>
                     </Col>
                     <Col>
-                      <h6>{this.state.timeBooking}am</h6>
+                      <h6>{this.state.timeBooking}</h6>
                     </Col>
                   </Row>
                   <Row>
@@ -253,7 +253,7 @@ class Order extends Component {
                     </div>
                     <div class="col-sm-6">
                       <h6>
-                        ${this.state.price * this.state.selectSeats.length}
+                        Rp.{this.state.price * this.state.selectSeats.length}
                       </h6>
                     </div>
                   </div>

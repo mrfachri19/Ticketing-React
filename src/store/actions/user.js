@@ -9,7 +9,7 @@ export const GetUser = () => {
 export const updatePassword = (data) => {
   return {
     type: "UPDATEPASSWORD",
-    payload: axios.patch("auth/update-password", data),
+    payload: axios.patch("user/update-password", data),
   };
 };
 

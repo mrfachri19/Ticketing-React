@@ -6,6 +6,7 @@ import { GetUser } from "../../../store/actions/user";
 import { connect } from "react-redux";
 import axios from "../../../utils/axios";
 import Profiluser from "../../../components/ProfileInfo";
+import UserPrivacy from "../../../components/UserPrivacy";
 import { Link } from "react-router-dom";
 import "./index.css";
 
@@ -88,6 +89,7 @@ class Profile extends Component {
   };
 
   render() {
+    // eslint-disable-next-line no-unused-vars
     const { user } = this.props;
     return (
       <div className="body__payment">
@@ -95,7 +97,7 @@ class Profile extends Component {
         <Container>
           <Row>
             <Col sm={4}>
-              <Card style={{ width: "18rem" }}>
+              <Card style={{ width: "18rem", borderRadius: "10px" }}>
                 <Profiluser />
               </Card>
             </Col>
@@ -104,10 +106,27 @@ class Profile extends Component {
                 <div className="navbar__profile">
                   <Nav>
                     <Nav.Item as="li">
-                      <Link to="/profile">Account Settings</Link>
+                      <Link
+                        to="/profile"
+                        style={{
+                          textDecoration: "none",
+                          marginRight: "20px",
+                          color: "black",
+                        }}
+                      >
+                        Account Settings
+                      </Link>
                     </Nav.Item>
                     <Nav.Item as="li">
-                      <Link to="/orderhistory">Order History</Link>
+                      <Link
+                        to="/orderhistory"
+                        style={{
+                          textDecoration: "none",
+                          color: "black",
+                        }}
+                      >
+                        Order History
+                      </Link>
                     </Nav.Item>
                   </Nav>
                   <hr className="my-4" />
@@ -165,30 +184,8 @@ class Profile extends Component {
                     </div>
                   </Form>
                   <Row>
-                    <h5>
-                      Account and Privacy <hr className="my-4" />
-                    </h5>
+                    <UserPrivacy />
                   </Row>
-                  <Form>
-                    <Row className="mb-3">
-                      <Form.Group as={Col} controlId="formGridEmail">
-                        <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Password" />
-                      </Form.Group>
-                      <Form.Group as={Col} controlId="formGridPassword">
-                        <Form.Label>New Password</Form.Label>
-                        <Form.Control
-                          type="password"
-                          placeholder="New Password"
-                        />
-                      </Form.Group>
-                    </Row>
-                    <div className="button__profile">
-                      <Button variant="primary" type="submit">
-                        Update Change
-                      </Button>
-                    </div>
-                  </Form>
                 </div>
               </Row>
             </Col>

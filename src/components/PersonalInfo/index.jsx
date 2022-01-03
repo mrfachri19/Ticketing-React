@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Warning from "../../assets/image/vektor goo.png";
 import axios from "../../utils/axios";
 export class PersonalInfo extends Component {
   constructor() {
@@ -30,14 +29,14 @@ export class PersonalInfo extends Component {
     console.log(this.state.users);
     return (
       <>
-        <section className="personal__main-info">
+        <section>
           <h4 className="personal__main-info-title">Personal Info</h4>
-          <div className="personal__main-info-card">
+          <div className="payment__main-info-card">
             <div className="personal__main-info-card-child">
               <p>Full Name</p>
               <input
                 type="text"
-                className="personal__main-info-card-input"
+                className="form-control"
                 name="userId"
                 value={
                   this.state.users.length > 0 && this.state.users[0].firstName
@@ -48,7 +47,7 @@ export class PersonalInfo extends Component {
               <p>Email</p>
               <input
                 type="email"
-                className="personal__main-info-card-input"
+                className="form-control"
                 value={this.state.users.length > 0 && this.state.users[0].email}
               />
             </div>
@@ -56,21 +55,14 @@ export class PersonalInfo extends Component {
               <p>Phone Number</p>
               <input
                 type="text"
-                className="personal__main-info-card-input"
+                className="form-control"
                 name="phoneNumber"
                 value={
                   this.state.users.length > 0 && this.state.users[0].noTelp
                 }
               />
             </div>
-            <div className="personal__main-info-card-alert">
-              <img src={Warning} className="img-fluid" alt="Warning Alert" />
-              <span>Fill your data correctly.</span>
-            </div>
           </div>
-          <button className="payment__main-method-button-active-mobile">
-            Pay your order
-          </button>
         </section>
       </>
     );

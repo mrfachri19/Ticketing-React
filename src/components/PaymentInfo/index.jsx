@@ -85,7 +85,7 @@ export class PaymentInfo extends Component {
               <p>Date & time</p>
               <span>
                 {new Date(paymentInfo.dateBooking).toDateString()} at{" "}
-                {paymentInfo.timeBooking}am
+                {paymentInfo.timeBooking}
               </span>
             </div>
             <hr className="payment__main-info-card-line" />
@@ -109,7 +109,7 @@ export class PaymentInfo extends Component {
             <div className="payment__main-info-card-child">
               <p>Total payment</p>
               <span>
-                ${!paymentInfo.seat ? null : paymentInfo.seat.length * 10},00
+                Rp.{!paymentInfo.seat ? null : paymentInfo.seat.length * 70000}
               </span>
             </div>
           </div>

@@ -5,7 +5,7 @@ import Header from "../../Header";
 import Footer from "../../Footer";
 import Hiflix from "../../../assets/image/Sponsor1.png";
 import EbvId from "../../../assets/image/Sponsor2.png";
-import CineOne21 from "../../../assets/image/Sponsor3.png";
+import CineOne21 from "../../../assets/image/Sponsor1.png";
 import { withRouter } from "react-router-dom";
 import {
   getAllPremiere,
@@ -27,8 +27,8 @@ class ManageSchedule extends Component {
     super(props);
     this.state = {
       premiere: props.premieres.premiere,
-      page: 1,
-      limit: 20,
+      page: 2,
+      limit: 3,
       dataLocation: [],
       setUpdate: false,
       isUpdate: false,
@@ -203,7 +203,7 @@ class ManageSchedule extends Component {
         this.props.premieres.premiere = response.value.data.data;
       })
       .catch(() => {
-        toast.error("Movie tidak ditemukan!");
+        toast.error("Movie not found!");
         this.props.getAllPremiere(1, 20);
       });
   };
@@ -276,11 +276,11 @@ class ManageSchedule extends Component {
                         <div className="text-center">
                           <img
                             src={
-                              value.premiere === "heflix"
+                              value.premiere === "Hiflix"
                                 ? Hiflix
-                                : value.premiere === "Ebu.id"
+                                : value.premiere === "Ebv.id"
                                 ? EbvId
-                                : value.premiere === "Cinema21"
+                                : value.premiere === "CineOne21"
                                 ? CineOne21
                                 : null
                             }
@@ -314,7 +314,7 @@ class ManageSchedule extends Component {
                       </div>
                       <div className="manage__schedule-list-card-price">
                         <span>Price</span>
-                        <span>{value.price}/seat</span>
+                        <span>Rp.{value.price}/seat</span>
                       </div>
                       <div className="manage__schedule-list-card-parent">
                         <button
@@ -345,8 +345,8 @@ class ManageSchedule extends Component {
             </section>
             <div>
               <Pagination
-                previousLabel={"previous"}
-                nextLabel={"next"}
+                previousLabel={"<"}
+                nextLabel={">"}
                 breakLabel={"..."}
                 pageCount={this.state.totalPage}
                 onPageChange={this.handlePagination}

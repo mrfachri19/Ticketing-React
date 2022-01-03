@@ -6,7 +6,6 @@ import "./index.css";
 import banner from "../../../assets/image/Group 14.png";
 import { Button, Col, Row, Form, Container } from "react-bootstrap";
 
-// import { Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 class Home extends Component {
@@ -244,20 +243,15 @@ class Home extends Component {
                 <h2 className="text-center">
                   Be the vanguard of the <br /> <span>Moviegoers</span>{" "}
                 </h2>
-                <div className="form__control">
-                  <Form>
-                    <Row className="align-items-center">
-                      <Col sm={{ span: 2, offset: 4 }} className="my-1">
-                        <Form.Control
-                          id="inlineFormInputName"
-                          placeholder="Type Your Email"
-                        />
-                      </Col>
-                      <Col xs="auto" className="my-1">
-                        <Button type="submit">Submit</Button>
-                      </Col>
-                    </Row>
-                  </Form>
+                <div className="form__control text-center">
+                  <div className="d-block d-md-flex justify-content-center align-items-center mt-5 mr-5">
+                    <input
+                      type="text"
+                      className="join__tickitz"
+                      placeholder="Type your email"
+                    />
+                    <button className="btn btn-primary">Join Now</button>
+                  </div>
                 </div>
                 <p className="text-center">
                   By joining you as a Tickitz member,

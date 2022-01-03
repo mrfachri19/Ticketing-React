@@ -1,6 +1,6 @@
 /* eslint-disable no-lone-blocks */
 import React, { Component } from "react";
-// import ManageMovie from "../../assets/img/movies3.png";
+import ManageMovie from "../../assets/image/Rectangle 139.png";
 import Premier1 from "../../assets/image/Sponsor1.png";
 import Premier2 from "../../assets/image/Sponsor2.png";
 import Premier3 from "../../assets/image/Sponsor3.png";
@@ -207,7 +207,7 @@ class FormSchedule extends Component {
           >
             <div className="manage__schedule-form-card">
               <div className="manage__schedule-form-card-body">
-                {/* <img src={ManageMovie} className="img-fluid" alt="Movies" /> */}
+                <img src={ManageMovie} className="img-fluid" alt="Movies" />
               </div>
               <div className="row manage__schedule-form-card-row">
                 <div className="col-md-6 mb-4">
@@ -341,15 +341,15 @@ class FormSchedule extends Component {
                               type="text"
                               onKeyPress={this.handleAddedTime}
                               name="time"
-                              className="form-control"
-                              // style={{ width: "200px" }}
+                              className="form-control add_time"
+                              style={{ width: "200px" }}
                             />
                           ) : (
                             <input
                               type="text"
                               onKeyPress={this.handleAddedTime}
                               name="time"
-                              className="form-control w-100"
+                              className="form-control w-100 add_time"
                             />
                           )
                         ) : (

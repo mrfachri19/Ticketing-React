@@ -1,14 +1,5 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Card,
-  Nav,
-  DropdownButton,
-  Dropdown,
-  Button,
-} from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import Header from "../../Header";
 import Footer from "../../Footer";
 import cinema from "../../../assets/image/Vector-1.png";
@@ -18,7 +9,6 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { useTicked } from "../../../store/actions/user";
 import { ToastContainer, toast } from "react-toastify";
-import Profiluser from "../../../components/ProfileInfo";
 
 export class OrderHistory extends Component {
   constructor() {
@@ -79,111 +69,86 @@ export class OrderHistory extends Component {
         <Header />
         <Container>
           <Row>
-            <Col sm={4}>
-              <Card style={{ width: "18rem" }}>
-                <Profiluser />
-              </Card>
-            </Col>
-            <Col sm={8}>
-              <Row>
-                <div className="navbar__profile">
-                  <Nav>
-                    <Nav.Item as="li">
-                      <Link to="/profile">Account Settings</Link>
-                    </Nav.Item>
-                    <Nav.Item as="li">
-                      <Link to="/orderhistory">Order History</Link>
-                    </Nav.Item>
-                  </Nav>
-                </div>
-              </Row>
-              <Row>
-                <div className="orderbox">
-                  <Row>
-                    <Col sm={9}>
-                      <p style={{ fontSize: "14px", color: "#4E4B66" }}>
-                        Tuesday, 07 July 2021 - 4.30 PM
-                      </p>
-                      <h5 style={{ fontSize: "20px" }}>
-                        Spiderman: Homecoming
-                      </h5>
-                    </Col>
-                    <Col sm={3}>
+            {orders.length > 0 ? (
+              orders.map((order) => (
+                <div
+                  className="profile__column-settings-order-history-card"
+                  key={order.id}
+                >
+                  <ToastContainer />
+                  <div className="profile__column-settings-order-history-desc">
+                    <span className="profile__column-settings-order-history-date">
+                      {new Date(order.dateBooking).toDateString()} -{" "}
+                      {order.timeBooking}pm
+                    </span>
+                    <div className="profile__column-settings-order-history-details">
+                      <h3>{order.title}</h3>
                       <img
                         src={cinema}
-                        style={{ width: "6rem", marginRight: "200px" }}
-                        alt=""
+                        width="100"
+                        style={{ objectFit: "contain" }}
+                        className="img-fluid"
+                        alt="Cineone21"
                       />
-                    </Col>
-                  </Row>
-                  <hr className="my-4" />
-                  <Row>
-                    <Col sm={9}>
-                      <Button variant="primary" type="submit">
-                        Ticket in Active
-                      </Button>
-                    </Col>
-                    <Col sm={3}>
-                      <DropdownButton
-                        id="dropdown-basic-button"
-                        title="Movie Detail"
+                    </div>
+                    <hr />
+                    <div className="profile__column-settings-order-history-bottom">
+                      <button
+                        className={`profile__column-settings-order-history-bottom-checked-${
+                          order.statusUsed !== "active" ? "used" : "active"
+                        }`}
+                        onClick={
+                          order.statusUsed === "active"
+                            ? () => this.handleUseTicked(order.id)
+                            : null
+                        }
                       >
-                        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">
-                          Another action
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/action-3">
-                          Something else
-                        </Dropdown.Item>
-                      </DropdownButton>
-                    </Col>
-                  </Row>
-                </div>
-              </Row>
-              <Row>
-                <div className="orderbox">
-                  <Row>
-                    <Col sm={9}>
-                      <p style={{ fontSize: "14px", color: "#4E4B66" }}>
-                        Tuesday, 07 July 2021 - 4.30 PM
-                      </p>
-                      <h5 style={{ fontSize: "20px" }}>
-                        Spiderman: Homecoming
-                      </h5>
-                    </Col>
-                    <Col sm={3}>
-                      <img
-                        src={cinema}
-                        style={{ width: "6rem", marginRight: "200px" }}
-                        alt=""
-                      />
-                    </Col>
-                  </Row>
-                  <hr className="my-4" />
-                  <Row>
-                    <Col sm={9}>
-                      <Button variant="primary" type="submit">
-                        Ticket in Active
-                      </Button>
-                    </Col>
-                    <Col sm={3}>
-                      <DropdownButton
-                        id="dropdown-basic-button"
-                        title="Movie Detail"
+                        {order.statusUsed !== "active"
+                          ? "Ticket Used"
+                          : "Ticket in active"}
+                      </button>
+
+                      <button
+                        className="d-none d-md-block profile__column-settings-order-history-bottom-show-details"
+                        onClick={this.handleShowDetails}
                       >
-                        <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
-                        <Dropdown.Item href="#/action-2">
-                          Another action
-                        </Dropdown.Item>
-                        <Dropdown.Item href="#/action-3">
-                          Something else
-                        </Dropdown.Item>
-                      </DropdownButton>
-                    </Col>
-                  </Row>
+                        Show Details
+                      </button>
+                    </div>
+                  </div>
+                  {this.state.showDetails ? (
+                    <div className="profile__column-settings-order-history-bottom-show-details">
+                      <div className="profile__column-settings-order-history-show-details-title">
+                        <p>Seats</p>
+                        <span>{order.seat}</span>
+                      </div>
+                      <div className="profile__column-settings-order-history-show-details-title">
+                        <p>Date Booking</p>
+                        <span>
+                          {new Date(order.dateBooking).toDateString()}
+                        </span>
+                      </div>
+                      <div className="profile__column-settings-order-history-show-details-title">
+                        <p>Time Booking</p>
+                        <span>{order.timeBooking}</span>
+                      </div>
+                      <div className="profile__column-settings-order-history-show-details-title">
+                        <p>paymentMethod</p>
+                        <span>{order.paymentMethod}</span>
+                      </div>
+                      <div className="profile__column-settings-order-history-show-details-title">
+                        <p>Total Ticket</p>
+                        <span>{order.totalTicket}</span>
+                      </div>
+                    </div>
+                  ) : null}
                 </div>
-              </Row>
-            </Col>
+              ))
+            ) : (
+              <p className="text-center fs-2 fw-bold mt-3">
+                History masih kosong, Pesan Film yu <Link to="/">disini!</Link>
+              </p>
+            )}
           </Row>
         </Container>
         <Footer />

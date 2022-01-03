@@ -17,7 +17,9 @@ function Register(props) {
   const [email, setEmail] = useState("");
   const [noTelp, setNoTelp] = useState("");
   const [password, setPassword] = useState("");
+  // eslint-disable-next-line no-unused-vars
   const [isLoading, setLoading] = useState(props.auth.isLoading);
+  // eslint-disable-next-line no-unused-vars
   const [isError, setError] = useState(props.auth.isError);
   const handleSubmitRegistration = (event) => {
     event.preventDefault();

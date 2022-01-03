@@ -1,15 +1,8 @@
 import React, { Component } from "react";
-import {
-  Container,
-  Row,
-  Col,
-  // Form,
-  // InputGroup,
-  // FormControl,
-  Button,
-} from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import Header from "../../Header/index";
 import Footer from "../../Footer/index";
+// eslint-disable-next-line no-unused-vars
 import { Link } from "react-router-dom";
 import "./index.css";
 import PaymentInfo from "../../../components/PaymentInfo";
@@ -48,22 +41,30 @@ class Payment extends Component {
       ? this.props.location.state.setDataPayment
       : "";
     return (
-      <div className="body__payment">
-        <Header />
-        <Container>
-          <Row>
-            <Col sm={7}>
-              <h3 style={{ marginTop: "56px" }}>Payment Info</h3>
-              <PaymentInfo paymentInfo={data} />
-            </Col>
-            <Col sm={4}>
-              <h3>Personal Info</h3>
-              <PersonalInfo />
-            </Col>
-          </Row>
-        </Container>
-        <Footer />
-      </div>
+      <>
+        <div className="body__payment">
+          <Header />
+          <div style={{ marginButtom: "40px" }}>
+            <Container>
+              <Row>
+                <Col sm={7}>
+                  <div style={{ marginTop: "50px" }}>
+                    <PaymentInfo paymentInfo={data} />
+                  </div>
+                </Col>
+                <Col sm={4}>
+                  <div style={{ marginTop: "50px" }}>
+                    <PersonalInfo />
+                  </div>
+                </Col>
+              </Row>
+            </Container>
+          </div>
+        </div>
+        <div style={{ marginTop: "40px" }}>
+          <Footer />
+        </div>
+      </>
     );
   }
 }

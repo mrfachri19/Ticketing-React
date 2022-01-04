@@ -72,7 +72,7 @@ Before installing, you must be install [nodejs and npm.](https://nodejs.org)
 1. Clone this repo
 
 ```sh
-git clone https:
+git clone https: https://github.com/mrfachri19/Ticketing-React.git
 ```
 
 2. Install NPM package
@@ -106,4 +106,5 @@ npm start
 
 ## Contact
 
-
+repository: https://github.com/mrfachri19/Ticketing-React.git
+API : 

@@ -109,7 +109,7 @@ const TiketResult = (props) => {
           <h3>Dashboard</h3>
           {isError ? (
             <p className="fw-bold text-center mt-5 text-danger">
-              Data Statistic Tidak ditemukan!
+              Statistic not found!
             </p>
           ) : (
             <div className="dashboard__chart-card">

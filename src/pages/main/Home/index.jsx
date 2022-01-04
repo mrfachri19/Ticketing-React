@@ -214,7 +214,7 @@ class Home extends Component {
                       alt={movie.title}
                     />
                     <div className="movies__list--card-hover text-center">
-                      <h2>{movie.title}</h2>
+                      <h2>{movie.name}</h2>
                       <p>{movie.category}</p>
 
                       <button

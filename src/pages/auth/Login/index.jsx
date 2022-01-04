@@ -145,14 +145,10 @@ class Login extends Component {
           </div>
           <div className="row text-center form__login-reset">
             <p>
-              Forgot Your Password? <Link to="www.google.com">Reset Now</Link>{" "}
-            </p>
-          </div>
-          <div className="row text-center .form__login-register">
-            <p>
               Don't have any account? <Link to="/register">Register</Link>{" "}
             </p>
           </div>
+
           <div className="row button__login">
             <div className="col-sm-6 form__login-btnlink text-center">
               <Button variant="light">

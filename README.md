@@ -43,18 +43,23 @@ some technology used in this project.
 - [Axios](https://www.npmjs.com/package/axios)
 - [Redux](https://redux.js.org/)
 
-
 <!-- DEMO -->
 
 ## Demo
 
 ### Link
 
-Web app [https://tickitzmovie.netlify.app/]
+Web : [https://tickitzmovie.netlify.app/]
 
 ### Screenshot
 
-
+<div >
+    <img width="300" src="./src/assets/image/sc1.PNG">
+    <img width="300" src="./src/assets/image/sc3.PNG">
+    <img width="300" src="./src/assets/image/login.PNG">
+    <img width="300" src="./src/assets/image/order.PNG">
+    <img width="300" src="./src/assets/image/moviedetail.PNG">
+</div>
 
 <!-- GETTING STARTED -->
 

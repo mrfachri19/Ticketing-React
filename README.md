@@ -51,3 +51,59 @@ some technology used in this project.
 ### Link
 
 Web app [https://tickitzmovie.netlify.app/]
+
+### Screenshot
+
+
+
+<!-- GETTING STARTED -->
+
+## Getting Started
+
+Get started with this project, intructions on setting up your project locally.
+To get a local copy up and running follow these simple steps.
+
+### Prerequisites
+
+Before installing, you must be install [nodejs and npm.](https://nodejs.org)
+
+### Installation
+
+1. Clone this repo
+
+```sh
+git clone https:
+```
+
+2. Install NPM package
+
+```sh
+cd tickitz-app
+npm install
+```
+
+3. Setting `.env`
+
+- create `.env` file
+
+```sh
+touch .env
+```
+
+- Add configuration in `.env` file
+
+```
+REACT_APP_API=yourapi
+```
+
+4. Start the project
+
+```sh
+npm start
+```
+
+<!-- CONTACT -->
+
+## Contact
+
+

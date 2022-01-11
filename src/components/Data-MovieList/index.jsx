@@ -99,8 +99,8 @@ function DataListMovie(props) {
                 onChange={handleSort}
               >
                 <option hidden>Sort</option>
-                <option value="ASC">January - December</option>
-                <option value="DESC">December - January</option>
+                <option value="name ASC">A - Z</option>
+                {/* <option value="DESC">December - January</option> */}
               </select>
               <input
                 type="text"
@@ -127,7 +127,7 @@ function DataListMovie(props) {
                   >
                     <>
                       <img
-                        src={`http://localhost:3001/uploads/movie/${film.image}`}
+                        src={`https://backend-fachri.fwebdev2.xyz//uploads/movie/${film.image}`}
                         className="manage__movie-list-card-image img-fluid"
                         alt={`${setNewDataMovie.name}`}
                       />

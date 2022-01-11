@@ -227,8 +227,8 @@ class ManageSchedule extends Component {
                   onChange={this.handleSort}
                 >
                   <option hidden>Sort</option>
-                  <option value="ASC">$10 - $100</option>
-                  <option value="DESC">$100 - $10</option>
+                  <option value="Price ASC">Rp.60.000 - Rp.400.000</option>
+                  {/* <option value="DESC">Rp.400.000 - Rp.60.000</option> */}
                 </select>
                 <select
                   className="manage__schedule-form"

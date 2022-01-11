@@ -205,80 +205,17 @@ h4::after {
   color: #5f2eea;
   font-weight: bold;
 }
-.upcomming__movies {
-  margin: 180px 0;
+
+.movies__list--card-main {
+  overflow-x: hidden;
 }
-.upcomming__movies--button-active {
-  padding: 8px 0px;
-  width: 100%;
-  font-size: 14px;
-  text-align: center;
-  border: none;
-  color: #ffffff;
-  background: #5f2eea;
-  box-shadow: 0px 8px 30px rgba(95, 46, 234, 0.3);
-  border-radius: 4px;
+
+.movies__list--card-main {
+  overflow-x: auto;
 }
-.upcomming__movies--button-active:hover {
-  color: #ffffff;
-}
-.upcomming__movies--button {
-  padding: 8px 0px;
-  width: 100%;
-  font-size: 14px;
-  text-align: center;
-  border: none;
-  background-color: transparent;
-  color: #5f2eea;
-  border: 1px solid #5f2eea;
-  border-radius: 4px;
-}
-.upcomming__movies-list {
-  background-color: #ffffff;
-  border: 1px solid #dedede;
-  border-radius: 24px;
-  padding: 24px;
-  width: 17%;
-}
-.upcomming__movies--image {
-  width: 244px;
-}
+
 span {
   display: block;
-}
-.upcomming__movies--button-details {
-  margin: 20px 0px;
-  border: 1px solid #5f2eea;
-  background-color: transparent;
-  color: #5f2eea;
-  width: 100%;
-  border-radius: 4px;
-}
-
-.upcomming__movies--button-parent {
-  overflow-x: hidden;
-}
-.upcomming__movies-button-child {
-  margin: 0px 2px;
-}
-.upcomming__movies-list-main {
-  overflow-x: hidden;
-}
-.upcomming__movies-list {
-  margin: 0px 19px;
-}
-.movies__list--card-main {
-  overflow-x: hidden;
-}
-
-.movies__list--card-main {
-  overflow-x: auto;
-}
-.upcomming__movies-list-main {
-  overflow-x: auto;
-}
-.upcomming__movies--button-parent {
-  overflow-x: auto;
 }
 
 /* ===================== dekstop ============================ */
@@ -483,79 +420,16 @@ span {
     color: #5f2eea;
     font-weight: bold;
   }
-  .upcomming__movies {
-    margin: 180px 0;
-  }
-  .upcomming__movies--button-active {
-    padding: 8px 0px;
-    width: 100%;
-    font-size: 14px;
-    text-align: center;
-    border: none;
-    color: #ffffff;
-    background: #5f2eea;
-    box-shadow: 0px 8px 30px rgba(95, 46, 234, 0.3);
-    border-radius: 4px;
-  }
-  .upcomming__movies--button-active:hover {
-    color: #ffffff;
-  }
-  .upcomming__movies--button {
-    padding: 8px 0px;
-    width: 100%;
-    font-size: 14px;
-    text-align: center;
-    border: none;
-    background-color: transparent;
-    color: #5f2eea;
-    border: 1px solid #5f2eea;
-    border-radius: 4px;
-  }
-  .upcomming__movies-list {
-    background-color: #ffffff;
-    border: 1px solid #dedede;
-    border-radius: 24px;
-    padding: 24px;
-    width: 17%;
-  }
-  .upcomming__movies--image {
-    width: 244px;
-  }
+
   span {
     display: block;
   }
-  .upcomming__movies--button-details {
-    margin: 20px 0px;
-    border: 1px solid #5f2eea;
-    background-color: transparent;
-    color: #5f2eea;
-    width: 100%;
-    border-radius: 4px;
-  }
 
-  .upcomming__movies--button-parent {
-    overflow-x: hidden;
-  }
-  .upcomming__movies-button-child {
-    margin: 0px 2px;
-  }
-  .upcomming__movies-list-main {
-    overflow-x: hidden;
-  }
-  .upcomming__movies-list {
-    margin: 0px 19px;
-  }
   .movies__list--card-main {
     overflow-x: hidden;
   }
 
   .movies__list--card-main {
-    overflow-x: auto;
-  }
-  .upcomming__movies-list-main {
-    overflow-x: auto;
-  }
-  .upcomming__movies--button-parent {
     overflow-x: auto;
   }
 }
